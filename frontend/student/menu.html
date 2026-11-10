@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Menu - IIIT Mess</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .mobile-cards { display: none; }
+    @media (max-width: 768px) {
+      .desktop-table { display: none; }
+      .mobile-cards { display: flex; flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">M</div>
+        <div>
+          <div class="brand-title">IIIT Mess</div>
+          <div class="brand-subtitle">Student Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Dashboard
+        </a>
+        <a href="menu.html" class="nav-link active">
+          <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          Weekly Menu
+        </a>
+        <a href="buy-coupon.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm13-6v11c0 1.1-.9 2-2 2H4v-2h17V7h2z"/></svg>
+          Buy Coupons
+        </a>
+        <a href="my-coupons.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm-1 14H5c-.55 0-1-.45-1-1v-5h16v5c0 .55-.45 1-1 1zm1-10H4V6h16v2z"/></svg>
+          My Coupons
+        </a>
+        <a href="mess-leave.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          Mess Leave
+        </a>
+        <a href="complaints.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
+          Complaints
+        </a>
+        <a href="payment-history.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+          Payment History
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-outline btn-block btn-sm" data-logout>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="sidebar-toggle" class="menu-toggle-btn" aria-label="Toggle Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </button>
+          <h2>Weekly Mess Menu</h2>
+        </div>
+        <div class="user-badge">
+          <div id="user-avatar" class="user-avatar">S</div>
+          <div>
+            <div id="user-name" class="fw-bold">Student</div>
+            <div id="user-roll" class="text-xs text-muted">Roll No</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Weekly Mess Timetable</h1>
+            <p class="page-description">Standard weekly menu scheduled for IIIT Bhubaneswar Hostels</p>
+          </div>
+        </div>
+
+        <!-- Desktop Table View -->
+        <div class="card desktop-table">
+          <div class="table-responsive">
+            <table class="table" id="menu-table">
+              <thead>
+                <tr>
+                  <th style="width: 140px;">Day</th>
+                  <th>Breakfast (7:30 - 9:00 AM)</th>
+                  <th>Lunch (12:00 - 2:00 PM)</th>
+                  <th>Snacks (4:00 - 5:00 PM)</th>
+                  <th>Dinner (7:30 - 9:00 PM)</th>
+                </tr>
+              </thead>
+              <tbody id="menu-table-body">
+                <tr><td colspan="5" class="loading-container"><div class="spinner"></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Mobile Cards View -->
+        <div class="mobile-cards" id="menu-mobile-cards">
+          <div class="loading-container"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await checkAuth('student');
+      if (!user) return;
+
+      const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+      const todayDay = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(new Date());
+
+      try {
+        const res = await api('/api/student/menu');
+        const menuItems = res.menu || [];
+
+        // Build structure: { [day]: { breakfast: '', lunch: '', snacks: '', dinner: '' } }
+        const weeklyMap = {};
+        days.forEach(d => {
+          weeklyMap[d] = { breakfast: '-', lunch: '-', snacks: '-', dinner: '-' };
+        });
+
+        menuItems.forEach(item => {
+          if (weeklyMap[item.day_of_week]) {
+            weeklyMap[item.day_of_week][item.meal_type.toLowerCase()] = item.items;
+          }
+        });
+
+        // 1. Render Desktop Table
+        const tbody = document.getElementById('menu-table-body');
+        tbody.innerHTML = days.map(d => {
+          const isToday = d === todayDay;
+          return `
+            <tr class="${isToday ? 'table-highlight-row' : ''}">
+              <td>
+                <strong>${d}</strong>
+                ${isToday ? '<br><span class="badge badge-active mt-1">Today</span>' : ''}
+              </td>
+              <td>${weeklyMap[d].breakfast}</td>
+              <td>${weeklyMap[d].lunch}</td>
+              <td>${weeklyMap[d].snacks}</td>
+              <td>${weeklyMap[d].dinner}</td>
+            </tr>
+          `;
+        }).join('');
+
+        // 2. Render Mobile Cards
+        const mobileContainer = document.getElementById('menu-mobile-cards');
+        mobileContainer.innerHTML = days.map(d => {
+          const isToday = d === todayDay;
+          return `
+            <div class="card ${isToday ? 'table-highlight-row' : ''}">
+              <div class="card-header">
+                <h3>${d}</h3>
+                ${isToday ? '<span class="badge badge-active">Today</span>' : ''}
+              </div>
+              <div class="card-body">
+                <div class="mb-2">
+                  <div class="fw-bold text-primary text-xs mb-1">BREAKFAST (7:30 - 9:00 AM)</div>
+                  <div class="text-sm">${weeklyMap[d].breakfast}</div>
+                </div>
+                <div class="mb-2">
+                  <div class="fw-bold text-success text-xs mb-1">LUNCH (12:00 - 2:00 PM)</div>
+                  <div class="text-sm">${weeklyMap[d].lunch}</div>
+                </div>
+                <div class="mb-2">
+                  <div class="fw-bold text-xs mb-1" style="color: #e37400;">SNACKS (4:00 - 5:00 PM)</div>
+                  <div class="text-sm">${weeklyMap[d].snacks}</div>
+                </div>
+                <div>
+                  <div class="fw-bold text-primary text-xs mb-1">DINNER (7:30 - 9:00 PM)</div>
+                  <div class="text-sm">${weeklyMap[d].dinner}</div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+      } catch (err) {
+        console.error('Error fetching menu:', err);
+      }
+    });
+  </script>
+</body>
+</html>

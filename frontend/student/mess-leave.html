@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mess Leave - IIIT Mess</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">M</div>
+        <div>
+          <div class="brand-title">IIIT Mess</div>
+          <div class="brand-subtitle">Student Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Dashboard
+        </a>
+        <a href="menu.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          Weekly Menu
+        </a>
+        <a href="buy-coupon.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm13-6v11c0 1.1-.9 2-2 2H4v-2h17V7h2z"/></svg>
+          Buy Coupons
+        </a>
+        <a href="my-coupons.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm-1 14H5c-.55 0-1-.45-1-1v-5h16v5c0 .55-.45 1-1 1zm1-10H4V6h16v2z"/></svg>
+          My Coupons
+        </a>
+        <a href="mess-leave.html" class="nav-link active">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          Mess Leave
+        </a>
+        <a href="complaints.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
+          Complaints
+        </a>
+        <a href="payment-history.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+          Payment History
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-outline btn-block btn-sm" data-logout>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="sidebar-toggle" class="menu-toggle-btn" aria-label="Toggle Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </button>
+          <h2>Mess Leave Management</h2>
+        </div>
+        <div class="user-badge">
+          <div id="user-avatar" class="user-avatar">S</div>
+          <div>
+            <div id="user-name" class="fw-bold">Student</div>
+            <div id="user-roll" class="text-xs text-muted">Roll No</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Mess Leave Application</h1>
+            <p class="page-description">Apply at least 1 day in advance. Approved leave marks active coupons as on leave and refunds their meal cost to your Mess Wallet.</p>
+          </div>
+        </div>
+
+        <!-- Apply Leave Form Card -->
+        <div class="card mb-4" style="max-width: 650px;">
+          <div class="card-header">
+            <h3>Apply for Mess Leave</h3>
+          </div>
+          <div class="card-body">
+            <form id="leave-form">
+              <div class="grid grid-cols-2 gap-2">
+                <div class="form-group">
+                  <label class="form-label" for="leave-start">Start Date *</label>
+                  <input type="date" id="leave-start" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="leave-end">End Date *</label>
+                  <input type="date" id="leave-end" class="form-control" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="leave-reason">Reason for Leave *</label>
+                <textarea id="leave-reason" class="form-textarea" placeholder="e.g. Vacation / Home visit / Medical leave / Academic project" required></textarea>
+              </div>
+
+              <button type="submit" id="submit-leave-btn" class="btn btn-primary">
+                Submit Leave Application
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Past Leave Applications Table -->
+        <div class="card">
+          <div class="card-header">
+            <h3>My Leave Requests</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Request ID</th>
+                  <th>Duration</th>
+                  <th>Dates</th>
+                  <th>Reason</th>
+                  <th>Status</th>
+                  <th>Submitted On</th>
+                </tr>
+              </thead>
+              <tbody id="leave-table-body">
+                <tr><td colspan="6" class="loading-container"><div class="spinner"></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await checkAuth('student');
+      if (!user) return;
+
+      const todayIST = getISTTodayString();
+      const tomorrowIST = addISTDays(todayIST, 1);
+      document.getElementById('leave-start').min = tomorrowIST;
+      document.getElementById('leave-end').min = tomorrowIST;
+
+      loadLeaves();
+
+      document.getElementById('leave-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const start_date = document.getElementById('leave-start').value;
+        const end_date = document.getElementById('leave-end').value;
+        const reason = document.getElementById('leave-reason').value.trim();
+
+        const currentToday = getISTTodayString();
+        if (start_date <= currentToday) {
+          showToast('Mess leave must start tomorrow or a future date (same-day cancellation is not allowed)', 'warning');
+          return;
+        }
+
+        if (end_date < start_date) {
+          showToast('End date cannot be earlier than start date', 'warning');
+          return;
+        }
+
+        const btn = document.getElementById('submit-leave-btn');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span> Submitting...';
+
+        try {
+          await api('/api/student/leave', {
+            method: 'POST',
+            body: { start_date, end_date, reason }
+          });
+
+          showToast('Leave request submitted successfully!', 'success');
+          document.getElementById('leave-form').reset();
+          loadLeaves();
+        } catch (err) {
+          // Handled by api()
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Submit Leave Application';
+        }
+      });
+    });
+
+    async function loadLeaves() {
+      const tbody = document.getElementById('leave-table-body');
+      try {
+        const res = await api('/api/student/leave');
+        const leaves = res.leaves || [];
+
+        if (leaves.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted" style="padding: 2rem;">No leave requests found.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = leaves.map(l => {
+          const s = new Date(l.start_date);
+          const e = new Date(l.end_date);
+          const diffDays = Math.ceil(Math.abs(e - s) / (1000 * 60 * 60 * 24)) + 1;
+
+          return `
+            <tr>
+              <td>#${l.id}</td>
+              <td><strong>${diffDays} Day(s)</strong></td>
+              <td>${formatDate(l.start_date)} &rarr; ${formatDate(l.end_date)}</td>
+              <td>${escapeHtml(l.reason) || '-'}</td>
+              <td>${renderBadge(l.status)}</td>
+              <td class="text-xs text-muted">${formatDate(l.created_at)}</td>
+            </tr>
+          `;
+        }).join('');
+      } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center text-error" style="padding: 2rem;">Error loading leave records.</td></tr>';
+      }
+    }
+  </script>
+</body>
+</html>

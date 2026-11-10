@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Menu - Admin Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .menu-cell {
+      position: relative;
+      cursor: pointer;
+      padding: 0.75rem;
+      border-radius: var(--radius-sm);
+      transition: background-color 0.15s;
+    }
+    .menu-cell:hover {
+      background-color: var(--primary-light);
+    }
+    .edit-icon {
+      font-size: 0.75rem;
+      color: var(--primary);
+      margin-left: 4px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon" style="background: linear-gradient(135deg, #188038, #34a853);">A</div>
+        <div>
+          <div class="brand-title">IIIT Mess</div>
+          <div class="brand-subtitle">Admin Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Dashboard
+        </a>
+        <a href="manage-menu.html" class="nav-link active">
+          <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          Manage Menu
+        </a>
+        <a href="verify-payments.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+          Verify Payments
+        </a>
+        <a href="mark-claims.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+          Mark Claims
+        </a>
+        <a href="spot-coupon.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm13-6v11c0 1.1-.9 2-2 2H4v-2h17V7h2z"/></svg>
+          Spot Coupon
+        </a>
+        <a href="leave-requests.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          Leave Requests
+        </a>
+        <a href="complaints.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
+          Complaints
+        </a>
+        <a href="students.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+          Students
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-outline btn-block btn-sm" data-logout>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="sidebar-toggle" class="menu-toggle-btn" aria-label="Toggle Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </button>
+          <h2>Manage Weekly Menu</h2>
+        </div>
+        <div class="user-badge">
+          <div id="user-avatar" class="user-avatar" style="background-color: var(--accent);">A</div>
+          <div>
+            <div id="user-name" class="fw-bold">Mess Admin</div>
+            <div id="user-role" class="text-xs text-muted">ADMIN</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Editable Weekly Mess Timetable</h1>
+            <p class="page-description">Click on any meal cell to edit dish items and update menu schedule</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="width: 130px;">Day</th>
+                  <th>Breakfast</th>
+                  <th>Lunch</th>
+                  <th>Snacks</th>
+                  <th>Dinner</th>
+                </tr>
+              </thead>
+              <tbody id="admin-menu-tbody">
+                <tr><td colspan="5" class="loading-container"><div class="spinner"></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Edit Menu Item Modal -->
+  <div class="modal-backdrop" id="edit-menu-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Edit Menu - <span id="modal-day-meal" class="text-primary"></span></h3>
+        <button class="toast-close" onclick="closeEditModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="modal-items-input">Menu Items (comma-separated or descriptive)</label>
+          <textarea id="modal-items-input" class="form-textarea" style="min-height: 120px;" placeholder="e.g. Rice, Dal Tadka, Paneer Butter Masala, Roti, Salad"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" onclick="closeEditModal()">Cancel</button>
+        <button type="button" id="save-menu-btn" class="btn btn-primary" onclick="saveMenuItem()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    let activeEditingId = null;
+    let menuData = [];
+    let menuById = {};
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await checkAuth(['admin', 'superadmin']);
+      if (!user) return;
+
+      loadMenu();
+    });
+
+    async function loadMenu() {
+      const tbody = document.getElementById('admin-menu-tbody');
+      try {
+        const res = await api('/api/admin/menu');
+        menuData = res.menu || [];
+        menuById = {};
+
+        // Build grid map: { Day: { breakfast: { id, items }, ... } }
+        const grid = {};
+        days.forEach(d => {
+          grid[d] = {
+            breakfast: { id: null, items: '-' },
+            lunch: { id: null, items: '-' },
+            snacks: { id: null, items: '-' },
+            dinner: { id: null, items: '-' }
+          };
+        });
+
+        menuData.forEach(item => {
+          menuById[item.id] = item;
+          if (grid[item.day_of_week]) {
+            grid[item.day_of_week][item.meal_type.toLowerCase()] = {
+              id: item.id,
+              items: item.items
+            };
+          }
+        });
+
+        tbody.innerHTML = days.map(day => `
+          <tr>
+            <td><strong>${day}</strong></td>
+            <td>${renderCell(day, 'breakfast', grid[day].breakfast)}</td>
+            <td>${renderCell(day, 'lunch', grid[day].lunch)}</td>
+            <td>${renderCell(day, 'snacks', grid[day].snacks)}</td>
+            <td>${renderCell(day, 'dinner', grid[day].dinner)}</td>
+          </tr>
+        `).join('');
+
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="5" class="text-center text-error" style="padding: 2rem;">Error loading menu: ${escapeHtml(err.message || 'Unknown error')}</td></tr>`;
+      }
+    }
+
+    function renderCell(day, meal, data) {
+      return `
+        <div class="menu-cell" onclick="openEditModal(${data.id}, '${day}', '${meal}')">
+          <div class="text-sm">${escapeHtml(data.items)}</div>
+          <span class="edit-icon">&#9998; Edit</span>
+        </div>
+      `;
+    }
+
+    function openEditModal(id, day, meal) {
+      if (!id || !menuById[id]) return;
+      activeEditingId = id;
+      const items = menuById[id].items || '';
+      document.getElementById('modal-day-meal').textContent = `${day} - ${meal.toUpperCase()}`;
+      document.getElementById('modal-items-input').value = items === '-' ? '' : items;
+      document.getElementById('edit-menu-modal').classList.add('show');
+    }
+
+    function closeEditModal() {
+      document.getElementById('edit-menu-modal').classList.remove('show');
+      activeEditingId = null;
+    }
+
+    async function saveMenuItem() {
+      if (!activeEditingId) return;
+
+      const items = document.getElementById('modal-items-input').value.trim();
+      if (!items) {
+        showToast('Menu items cannot be empty', 'warning');
+        return;
+      }
+
+      const saveBtn = document.getElementById('save-menu-btn');
+      saveBtn.disabled = true;
+      saveBtn.innerHTML = '<span class="spinner"></span> Saving...';
+
+      try {
+        await api(`/api/admin/menu/${activeEditingId}`, {
+          method: 'PUT',
+          body: { items }
+        });
+
+        showToast('Menu item updated successfully', 'success');
+        closeEditModal();
+        loadMenu();
+      } catch (err) {
+        // Handled by api()
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save Changes';
+      }
+    }
+  </script>
+</body>
+</html>

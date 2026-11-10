@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Admins - Super Admin</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon" style="background: linear-gradient(135deg, #b06000, #f29900);">S</div>
+        <div>
+          <div class="brand-title">IIIT Mess</div>
+          <div class="brand-subtitle">Super Admin Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Dashboard
+        </a>
+        <a href="daily-reports.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+          Daily Reports
+        </a>
+        <a href="manage-admins.html" class="nav-link active">
+          <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          Manage Admins
+        </a>
+        <a href="settings.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+          Settings
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-outline btn-block btn-sm" data-logout>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="sidebar-toggle" class="menu-toggle-btn" aria-label="Toggle Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </button>
+          <h2>Manage Administrator Accounts</h2>
+        </div>
+        <div class="user-badge">
+          <div id="user-avatar" class="user-avatar" style="background-color: var(--warning);">S</div>
+          <div>
+            <div id="user-name" class="fw-bold">Super Admin</div>
+            <div id="user-role" class="text-xs text-muted">SUPERADMIN</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Mess Administration Roster</h1>
+            <p class="page-description">Authorize staff accounts, appoint new mess managers, and deactivate former admins</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <!-- Add New Admin Card (1 col) -->
+          <div class="card" style="height: fit-content;">
+            <div class="card-header">
+              <h3>Create Admin Account</h3>
+            </div>
+            <div class="card-body">
+              <form id="create-admin-form">
+                <div class="form-group">
+                  <label class="form-label" for="admin-name">Full Name *</label>
+                  <input type="text" id="admin-name" class="form-control" placeholder="e.g. Mess Manager Sahoo" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="admin-roll">Employee / Admin ID *</label>
+                  <input type="text" id="admin-roll" class="form-control" placeholder="e.g. ADM002" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="admin-email">Official Email *</label>
+                  <input type="email" id="admin-email" class="form-control" placeholder="e.g. messmanager@iiitbbsr.ac.in" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="admin-hostel">Office / Hostel Assigned *</label>
+                  <input type="text" id="admin-hostel" class="form-control" placeholder="e.g. Central Mess Office / BH1" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="admin-password">Initial Password *</label>
+                  <input type="password" id="admin-password" class="form-control" placeholder="Min. 6 characters" required>
+                </div>
+
+                <button type="submit" id="create-admin-btn" class="btn btn-primary btn-block">
+                  Add Administrator
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Existing Admins Table (2 cols) -->
+          <div class="card" style="grid-column: span 2;">
+            <div class="card-header">
+              <h3>Active Admin Accounts</h3>
+            </div>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Admin ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Office/Hostel</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th style="text-align: right;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="admins-tbody">
+                  <tr><td colspan="7" class="loading-container"><div class="spinner"></div></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    let currentUserId = null;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await checkAuth('superadmin');
+      if (!user) return;
+      currentUserId = user.id;
+
+      loadAdmins();
+
+      document.getElementById('create-admin-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('admin-name').value.trim();
+        const roll_no = document.getElementById('admin-roll').value.trim();
+        const email = document.getElementById('admin-email').value.trim();
+        const hostel = document.getElementById('admin-hostel').value.trim();
+        const password = document.getElementById('admin-password').value;
+
+        const btn = document.getElementById('create-admin-btn');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span> Creating...';
+
+        try {
+          await api('/api/superadmin/admins', {
+            method: 'POST',
+            body: { name, roll_no, email, hostel, password }
+          });
+
+          showToast('Admin account created successfully!', 'success');
+          document.getElementById('create-admin-form').reset();
+          loadAdmins();
+        } catch (err) {
+          // Handled by api()
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Add Administrator';
+        }
+      });
+    });
+
+    async function loadAdmins() {
+      const tbody = document.getElementById('admins-tbody');
+      try {
+        const res = await api('/api/superadmin/admins');
+        const admins = res.admins || [];
+
+        tbody.innerHTML = admins.map(a => {
+          const isSelf = a.id === currentUserId;
+          const isSuper = a.role === 'superadmin';
+
+          return `
+            <tr>
+              <td><strong>${a.roll_no}</strong></td>
+              <td>${a.name} ${isSelf ? '<span class="text-xs text-muted">(You)</span>' : ''}</td>
+              <td class="text-xs">${a.email}</td>
+              <td>${a.hostel || '-'}</td>
+              <td>
+                <span class="badge" style="background-color: ${isSuper ? 'var(--warning-light)' : 'var(--primary-light)'};">
+                  ${a.role}
+                </span>
+              </td>
+              <td>${a.is_active ? '<span class="badge badge-active">Active</span>' : '<span class="badge badge-rejected">Deactivated</span>'}</td>
+              <td style="text-align: right;">
+                ${a.is_active && !isSelf && !isSuper ? `
+                  <button class="btn btn-danger-outline btn-sm" onclick="deactivateAdmin(${a.id}, '${a.name}')">
+                    Deactivate
+                  </button>
+                ` : '<span class="text-xs text-muted">-</span>'}
+              </td>
+            </tr>
+          `;
+        }).join('');
+      } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center text-error" style="padding: 2rem;">Error loading admins.</td></tr>';
+      }
+    }
+
+    async function deactivateAdmin(adminId, adminName) {
+      if (!confirm(`Are you sure you want to deactivate administrative access for ${adminName}?`)) {
+        return;
+      }
+
+      try {
+        await api(`/api/superadmin/admins/${adminId}`, { method: 'DELETE' });
+        showToast(`Admin ${adminName} has been deactivated`, 'success');
+        loadAdmins();
+      } catch (err) {
+        // Handled by api()
+      }
+    }
+  </script>
+</body>
+</html>

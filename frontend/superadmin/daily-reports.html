@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Reports - Super Admin Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon" style="background: linear-gradient(135deg, #b06000, #f29900);">S</div>
+        <div>
+          <div class="brand-title">IIIT Mess</div>
+          <div class="brand-subtitle">Super Admin Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Dashboard
+        </a>
+        <a href="daily-reports.html" class="nav-link active">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+          Daily Reports
+        </a>
+        <a href="manage-admins.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          Manage Admins
+        </a>
+        <a href="settings.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+          Settings
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-outline btn-block btn-sm" data-logout>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="sidebar-toggle" class="menu-toggle-btn" aria-label="Toggle Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </button>
+          <h2>Daily Mess Audit Reports</h2>
+        </div>
+        <div class="user-badge">
+          <div id="user-avatar" class="user-avatar" style="background-color: var(--warning);">S</div>
+          <div>
+            <div id="user-name" class="fw-bold">Super Admin</div>
+            <div id="user-role" class="text-xs text-muted">SUPERADMIN</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Daily Operations & Financial Reconciliation</h1>
+            <p class="page-description">Generate comprehensive daily consumption summaries and verified revenue reports</p>
+          </div>
+        </div>
+
+        <!-- Date Picker Card -->
+        <div class="card p-2 mb-3">
+          <div class="flex gap-2 items-center flex-wrap">
+            <div class="form-group mb-0" style="min-width: 220px;">
+              <label class="form-label" for="report-date-input">Select Audit Date</label>
+              <input type="date" id="report-date-input" class="form-control">
+            </div>
+            <div style="margin-top: 1.5rem;">
+              <button class="btn btn-primary" onclick="fetchDateReport()">Generate / Fetch Report</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Single Date Detailed Report View -->
+        <div id="report-detail-card" class="card mb-4" style="display: none;">
+          <div class="card-header flex justify-between items-center" style="background-color: var(--surface-alt);">
+            <h3>Audit Report for <span id="rep-date-title" class="text-primary">-</span></h3>
+            <span class="text-xs text-muted" id="rep-timestamp">-</span>
+          </div>
+
+          <div class="card-body">
+            <!-- Meal Attendance Stats -->
+            <h4 class="mb-2 text-secondary">Meals Served Breakdown</h4>
+            <div class="grid grid-cols-4 gap-2 mb-4">
+              <div class="card p-2" style="background-color: #fef7e0; border-color: #fdd663;">
+                <span class="text-xs text-muted fw-bold">BREAKFAST</span>
+                <div class="fw-bold" style="font-size: 1.5rem; color: #b06000;" id="rep-breakfast">0</div>
+              </div>
+
+              <div class="card p-2" style="background-color: var(--accent-light); border-color: var(--accent-border);">
+                <span class="text-xs text-muted fw-bold">LUNCH</span>
+                <div class="fw-bold text-success" style="font-size: 1.5rem;" id="rep-lunch">0</div>
+              </div>
+
+              <div class="card p-2" style="background-color: #fff3e0; border-color: #ffcc80;">
+                <span class="text-xs text-muted fw-bold">SNACKS</span>
+                <div class="fw-bold" style="font-size: 1.5rem; color: #e65100;" id="rep-snacks">0</div>
+              </div>
+
+              <div class="card p-2" style="background-color: var(--primary-light); border-color: var(--primary-border);">
+                <span class="text-xs text-muted fw-bold">DINNER</span>
+                <div class="fw-bold text-primary" style="font-size: 1.5rem;" id="rep-dinner">0</div>
+              </div>
+            </div>
+
+            <!-- Financial & Operational Reconciliations -->
+            <div class="grid grid-cols-3 gap-3">
+              <div class="card p-2">
+                <span class="text-xs text-muted fw-bold">VERIFIED REVENUE THAT DAY</span>
+                <div class="fw-bold text-success" style="font-size: 1.5rem;" id="rep-revenue">₹0.00</div>
+                <div class="text-xs text-muted mt-1">From verified online & cash transactions</div>
+              </div>
+
+              <div class="card p-2">
+                <span class="text-xs text-muted fw-bold">SKIPS & SPOT PURCHASES</span>
+                <div class="flex justify-between items-center mt-1">
+                  <div>
+                    <div class="text-xs text-muted">Total Skips:</div>
+                    <strong class="text-primary" id="rep-skips">0</strong>
+                  </div>
+                  <div>
+                    <div class="text-xs text-muted">Spot Walk-ins:</div>
+                    <strong class="text-secondary" id="rep-spot">0</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card p-2">
+                <span class="text-xs text-muted fw-bold">COMPLAINTS STATUS</span>
+                <div class="flex justify-between items-center mt-1">
+                  <div>
+                    <div class="text-xs text-muted">Total Raised:</div>
+                    <strong class="text-error" id="rep-complaints-total">0</strong>
+                  </div>
+                  <div>
+                    <div class="text-xs text-muted">Resolved:</div>
+                    <strong class="text-success" id="rep-complaints-resolved">0</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Historical Reports Table Card -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Archived Daily Reports</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Report Date</th>
+                  <th>Breakfast</th>
+                  <th>Lunch</th>
+                  <th>Snacks</th>
+                  <th>Dinner</th>
+                  <th>Total Served</th>
+                  <th>Skips</th>
+                  <th>Spot</th>
+                  <th>Revenue</th>
+                  <th>Complaints</th>
+                </tr>
+              </thead>
+              <tbody id="all-reports-tbody">
+                <tr><td colspan="10" class="loading-container"><div class="spinner"></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await checkAuth('superadmin');
+      if (!user) return;
+
+      const todayStr = new Date().toISOString().split('T')[0];
+      document.getElementById('report-date-input').value = todayStr;
+
+      fetchDateReport();
+      loadAllReports();
+    });
+
+    async function fetchDateReport() {
+      const date = document.getElementById('report-date-input').value;
+      if (!date) {
+        showToast('Please select a date', 'warning');
+        return;
+      }
+
+      try {
+        const res = await api(`/api/admin/reports/daily?date=${date}`);
+        const r = res.report || {};
+
+        document.getElementById('rep-date-title').textContent = formatDate(r.report_date);
+        document.getElementById('rep-timestamp').textContent = `Generated: ${formatDate(r.generated_at)}`;
+        document.getElementById('rep-breakfast').textContent = r.total_breakfast || 0;
+        document.getElementById('rep-lunch').textContent = r.total_lunch || 0;
+        document.getElementById('rep-snacks').textContent = r.total_snacks || 0;
+        document.getElementById('rep-dinner').textContent = r.total_dinner || 0;
+        document.getElementById('rep-skips').textContent = r.total_skips || 0;
+        document.getElementById('rep-spot').textContent = r.total_spot || 0;
+        document.getElementById('rep-revenue').textContent = formatCurrency(r.revenue);
+        document.getElementById('rep-complaints-total').textContent = r.total_complaints || 0;
+        document.getElementById('rep-complaints-resolved').textContent = r.complaints_resolved || 0;
+
+        document.getElementById('report-detail-card').style.display = 'block';
+        loadAllReports();
+      } catch (err) {
+        console.error('Error fetching report:', err);
+      }
+    }
+
+    async function loadAllReports() {
+      const tbody = document.getElementById('all-reports-tbody');
+      try {
+        const res = await api('/api/superadmin/reports');
+        const list = res.reports || [];
+
+        if (list.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="10" class="text-center text-muted" style="padding: 2rem;">No historical reports saved yet.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = list.map(r => {
+          const totalServed = (r.total_breakfast || 0) + (r.total_lunch || 0) + (r.total_snacks || 0) + (r.total_dinner || 0);
+          return `
+            <tr>
+              <td><strong>${formatDate(r.report_date)}</strong></td>
+              <td>${r.total_breakfast || 0}</td>
+              <td>${r.total_lunch || 0}</td>
+              <td>${r.total_snacks || 0}</td>
+              <td>${r.total_dinner || 0}</td>
+              <td><strong class="text-primary">${totalServed}</strong></td>
+              <td>${r.total_skips || 0}</td>
+              <td>${r.total_spot || 0}</td>
+              <td><strong class="text-success">${formatCurrency(r.revenue)}</strong></td>
+              <td>${r.complaints_resolved || 0} / ${r.total_complaints || 0} resolved</td>
+            </tr>
+          `;
+        }).join('');
+      } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="10" class="text-center text-error" style="padding: 2rem;">Error loading archived reports.</td></tr>';
+      }
+    }
+  </script>
+</body>
+</html>

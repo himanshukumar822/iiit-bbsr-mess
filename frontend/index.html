@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - IIIT Bhubaneswar Mess Management System</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="logo-badge">M</div>
+        <h1>IIIT Bhubaneswar</h1>
+        <p>Mess Management System</p>
+      </div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label" for="identifier">Roll Number or Email</label>
+          <input
+            type="text"
+            id="identifier"
+            class="form-control"
+            placeholder="e.g. B121001 or student@iiitbbsr.ac.in"
+            required
+            autocomplete="username"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            placeholder="Enter your password"
+            required
+            autocomplete="current-password"
+          >
+        </div>
+
+        <button type="submit" id="submit-btn" class="btn btn-primary btn-block btn-lg mt-2">
+          Sign In
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        <p>New student? <a href="register.html">Register here</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    // Check if already authenticated
+    (async () => {
+      try {
+        const res = await fetch('/api/auth/me', { credentials: 'include' });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.user) {
+            const role = data.user.role;
+            if (role === 'student') window.location.href = 'student/dashboard.html';
+            else if (role === 'admin') window.location.href = 'admin/dashboard.html';
+            else if (role === 'superadmin') window.location.href = 'superadmin/dashboard.html';
+          }
+        }
+      } catch (err) {
+        // Not logged in, stay on login page
+      }
+    })();
+
+    const loginForm = document.getElementById('login-form');
+    const submitBtn = document.getElementById('submit-btn');
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const identifier = document.getElementById('identifier').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!identifier || !password) {
+        showToast('Please provide both roll number/email and password', 'warning');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner"></span> Signing in...';
+
+      try {
+        const res = await api('/api/auth/login', {
+          method: 'POST',
+          body: { identifier, password }
+        });
+
+        showToast('Login successful! Redirecting...', 'success');
+        const role = res.user.role;
+        setTimeout(() => {
+          if (role === 'student') window.location.href = 'student/dashboard.html';
+          else if (role === 'admin') window.location.href = 'admin/dashboard.html';
+          else if (role === 'superadmin') window.location.href = 'superadmin/dashboard.html';
+          else window.location.href = 'student/dashboard.html';
+        }, 600);
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Sign In';
+      }
+    });
+  </script>
+</body>
+</html>

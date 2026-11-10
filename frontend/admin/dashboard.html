@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - IIIT Mess</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon" style="background: linear-gradient(135deg, #188038, #34a853);">A</div>
+        <div>
+          <div class="brand-title">IIIT Mess</div>
+          <div class="brand-subtitle">Admin Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html" class="nav-link active">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Dashboard
+        </a>
+        <a href="manage-menu.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          Manage Menu
+        </a>
+        <a href="verify-payments.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+          Verify Payments
+        </a>
+        <a href="mark-claims.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+          Mark Claims
+        </a>
+        <a href="spot-coupon.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm13-6v11c0 1.1-.9 2-2 2H4v-2h17V7h2z"/></svg>
+          Spot Coupon
+        </a>
+        <a href="leave-requests.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          Leave Requests
+        </a>
+        <a href="complaints.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
+          Complaints
+        </a>
+        <a href="students.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+          Students
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-outline btn-block btn-sm" data-logout>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="sidebar-toggle" class="menu-toggle-btn" aria-label="Toggle Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </button>
+          <h2>Admin Dashboard</h2>
+        </div>
+        <div class="user-badge">
+          <div id="user-avatar" class="user-avatar" style="background-color: var(--accent);">A</div>
+          <div>
+            <div id="user-name" class="fw-bold">Mess Admin</div>
+            <div id="user-role" class="text-xs text-muted">ADMIN</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Mess Administration Overview</h1>
+            <p class="page-description">Today's live stats, meal counts, and operational queue (<span id="stats-date">-</span>)</p>
+          </div>
+          <div class="flex gap-1">
+            <a href="mark-claims.html" class="btn btn-primary">Mark Claims</a>
+            <a href="spot-coupon.html" class="btn btn-outline">Issue Spot Coupon</a>
+          </div>
+        </div>
+
+        <!-- Metric Stat Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-label">Total Students</span>
+            <div class="stat-value" id="stat-students">0</div>
+            <span class="stat-subtext">Active registered students</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">Pending Payments</span>
+            <div class="stat-value text-error" id="stat-pending-payments">0</div>
+            <span class="stat-subtext"><a href="verify-payments.html">Review in Queue &rarr;</a></span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">Open Complaints</span>
+            <div class="stat-value text-primary" id="stat-open-complaints">0</div>
+            <span class="stat-subtext"><a href="complaints.html">Resolve Complaints &rarr;</a></span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">Today's Total Meals Served</span>
+            <div class="stat-value text-success" id="stat-total-served">0</div>
+            <span class="stat-subtext">Sum across 4 meals today</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <!-- Meal Counts Visual Card -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Today's Meals Served by Category</h3>
+            </div>
+            <div class="card-body">
+              <div class="bar-chart-container" id="meals-bars">
+                <div class="loading-container"><div class="spinner"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Navigation / Queue Card -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Administrative Quick Actions</h3>
+            </div>
+            <div class="card-body flex flex-col gap-2">
+              <a href="verify-payments.html" class="card p-2 flex justify-between items-center" style="border: 1px solid var(--border); text-decoration: none;">
+                <div>
+                  <strong class="text-primary">Verify Student Payments</strong>
+                  <div class="text-xs text-muted">Review screenshots and activate coupon subscriptions</div>
+                </div>
+                <span class="badge badge-pending" id="badge-pending-count">0</span>
+              </a>
+
+              <a href="mark-claims.html" class="card p-2 flex justify-between items-center" style="border: 1px solid var(--border); text-decoration: none;">
+                <div>
+                  <strong class="text-success">Live Meal Claiming</strong>
+                  <div class="text-xs text-muted">Scan or search student roll number to claim meal</div>
+                </div>
+                <span>&rarr;</span>
+              </a>
+
+              <a href="leave-requests.html" class="card p-2 flex justify-between items-center" style="border: 1px solid var(--border); text-decoration: none;">
+                <div>
+                  <strong class="text-secondary">Approve Leave Applications</strong>
+                  <div class="text-xs text-muted">Review student mess leave and rebate requests</div>
+                </div>
+                <span>&rarr;</span>
+              </a>
+
+              <a href="manage-menu.html" class="card p-2 flex justify-between items-center" style="border: 1px solid var(--border); text-decoration: none;">
+                <div>
+                  <strong class="text-secondary">Edit Weekly Menu Timetable</strong>
+                  <div class="text-xs text-muted">Update dishes and daily meal items</div>
+                </div>
+                <span>&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await checkAuth(['admin', 'superadmin']);
+      if (!user) return;
+
+      loadDashboardStats();
+    });
+
+    async function loadDashboardStats() {
+      try {
+        const res = await api('/api/admin/dashboard/stats');
+        const stats = res.stats || {};
+        const dateStr = res.date || '';
+
+        document.getElementById('stats-date').textContent = formatDate(dateStr);
+        document.getElementById('stat-students').textContent = stats.total_students || 0;
+        document.getElementById('stat-pending-payments').textContent = stats.pending_payments || 0;
+        document.getElementById('badge-pending-count').textContent = stats.pending_payments || 0;
+        document.getElementById('stat-open-complaints').textContent = stats.open_complaints || 0;
+
+        const meals = stats.meals_served || { breakfast: 0, lunch: 0, snacks: 0, dinner: 0 };
+        const totalServed = Object.values(meals).reduce((a, b) => a + b, 0);
+        document.getElementById('stat-total-served').textContent = totalServed;
+
+        // Render bar charts
+        const maxCount = Math.max(...Object.values(meals), 1);
+        const barsContainer = document.getElementById('meals-bars');
+
+        const mealLabels = [
+          { key: 'breakfast', name: 'Breakfast (7:30 - 9:00 AM)', class: 'breakfast' },
+          { key: 'lunch', name: 'Lunch (12:00 - 2:00 PM)', class: 'lunch' },
+          { key: 'snacks', name: 'Snacks (4:00 - 5:00 PM)', class: 'snacks' },
+          { key: 'dinner', name: 'Dinner (7:30 - 9:00 PM)', class: 'dinner' }
+        ];
+
+        barsContainer.innerHTML = mealLabels.map(m => {
+          const count = meals[m.key] || 0;
+          const percent = Math.round((count / maxCount) * 100);
+          return `
+            <div class="bar-item">
+              <div class="bar-label-row">
+                <span><strong>${m.name}</strong></span>
+                <span class="fw-bold">${count} served</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill ${m.class}" style="width: ${percent}%;"></div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+      } catch (err) {
+        console.error('Error fetching dashboard stats:', err);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Payments - Admin Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon" style="background: linear-gradient(135deg, #188038, #34a853);">A</div>
+        <div>
+          <div class="brand-title">IIIT Mess</div>
+          <div class="brand-subtitle">Admin Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Dashboard
+        </a>
+        <a href="manage-menu.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          Manage Menu
+        </a>
+        <a href="verify-payments.html" class="nav-link active">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+          Verify Payments
+        </a>
+        <a href="mark-claims.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+          Mark Claims
+        </a>
+        <a href="spot-coupon.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm13-6v11c0 1.1-.9 2-2 2H4v-2h17V7h2z"/></svg>
+          Spot Coupon
+        </a>
+        <a href="leave-requests.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          Leave Requests
+        </a>
+        <a href="complaints.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
+          Complaints
+        </a>
+        <a href="students.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+          Students
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-outline btn-block btn-sm" data-logout>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="sidebar-toggle" class="menu-toggle-btn" aria-label="Toggle Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </button>
+          <h2>Verify Pending Payments</h2>
+        </div>
+        <div class="user-badge">
+          <div id="user-avatar" class="user-avatar" style="background-color: var(--accent);">A</div>
+          <div>
+            <div id="user-name" class="fw-bold">Mess Admin</div>
+            <div id="user-role" class="text-xs text-muted">ADMIN</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Pending Payment Verification Queue</h1>
+            <p class="page-description">Review payments, verify bank screenshots, and generate student coupons</p>
+          </div>
+          <button class="btn btn-outline" onclick="loadPendingPayments()">Refresh Queue</button>
+        </div>
+
+        <!-- Payments Queue Container -->
+        <div id="payments-queue-container">
+          <div class="loading-container"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Image Modal for Full Screenshot -->
+  <div class="modal-backdrop" id="image-modal">
+    <div class="modal" style="max-width: 650px;">
+      <div class="modal-header">
+        <h3>Payment Screenshot Preview</h3>
+        <button class="toast-close" onclick="closeImageModal()">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <img id="modal-img" src="" alt="Payment Screenshot" style="max-height: 75vh; margin: 0 auto; border-radius: var(--radius);">
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await checkAuth(['admin', 'superadmin']);
+      if (!user) return;
+
+      loadPendingPayments();
+    });
+
+    async function loadPendingPayments() {
+      const container = document.getElementById('payments-queue-container');
+      container.innerHTML = '<div class="loading-container"><div class="spinner"></div></div>';
+
+      try {
+        const res = await api('/api/admin/payments/pending');
+        const list = res.pending_payments || [];
+
+        if (list.length === 0) {
+          container.innerHTML = `
+            <div class="card p-4 text-center">
+              <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem;">🎉</span>
+              <h3>No Pending Payments!</h3>
+              <p class="text-muted mt-1">All student coupon subscriptions are currently up to date.</p>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = list.map(item => {
+          let dateRangeStr = 'N/A';
+          if (item.start_date && item.end_date) {
+            dateRangeStr = `${formatDate(item.start_date)} to ${formatDate(item.end_date)}`;
+          }
+
+          let screenshotPreview = '<span class="text-xs text-muted">No screenshot (Cash payment)</span>';
+          if (item.screenshot_path) {
+            screenshotPreview = `
+              <div class="flex items-center gap-2 mt-1">
+                <img
+                  src="${item.screenshot_path}"
+                  alt="Receipt"
+                  style="width: 70px; height: 70px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--border); cursor: pointer;"
+                  onclick="openImageModal('${item.screenshot_path}')"
+                  title="Click to view full screenshot"
+                >
+                <button type="button" class="btn btn-outline btn-sm" onclick="openImageModal('${item.screenshot_path}')">
+                  View Full Receipt
+                </button>
+              </div>
+            `;
+          }
+
+          return `
+            <div class="card mb-3" id="payment-card-${item.id}">
+              <div class="card-header flex justify-between items-center" style="background-color: var(--surface-alt);">
+                <div>
+                  <strong>Payment #${item.id}</strong> &bull;
+                  <span class="text-xs text-muted">Submitted ${formatDate(item.created_at)}</span>
+                </div>
+                <div>${renderBadge(item.status)}</div>
+              </div>
+
+              <div class="card-body">
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                  <div>
+                    <span class="text-xs text-muted">STUDENT</span>
+                    <div class="fw-bold">${item.student_name}</div>
+                    <div class="text-xs text-secondary">Roll: ${item.roll_no} | ${item.hostel || 'Hostel N/A'}</div>
+                  </div>
+
+                  <div>
+                    <span class="text-xs text-muted">AMOUNT & METHOD</span>
+                    <div class="fw-bold text-primary" style="font-size: 1.25rem;">${formatCurrency(item.amount)}</div>
+                    <div class="text-xs text-secondary" style="text-transform: capitalize;">
+                      Method: ${item.method}${parseFloat(item.wallet_used) > 0 ? ` (+ Wallet: ${formatCurrency(item.wallet_used)})` : ''}
+                    </div>
+                  </div>
+
+                  <div>
+                    <span class="text-xs text-muted">COUPON ORDER PERIOD</span>
+                    <div class="fw-bold text-sm">${dateRangeStr}</div>
+                    <div class="text-xs text-secondary">${item.includes_sunday ? 'Includes Sundays' : 'Sundays excluded'}</div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <span class="text-xs text-muted fw-bold">SCREENSHOT / TRANSACTION PROOF:</span>
+                  ${screenshotPreview}
+                </div>
+
+                <div class="form-group mb-3">
+                  <label class="form-label" for="notes-${item.id}">Verification Notes / Reference (Optional)</label>
+                  <input type="text" id="notes-${item.id}" class="form-control" placeholder="e.g. UTR verified / Cash received at counter">
+                </div>
+
+                <div class="flex gap-2 justify-end">
+                  <button type="button" class="btn btn-danger-outline" onclick="processPayment(${item.id}, 'reject')">
+                    Reject Payment
+                  </button>
+                  <button type="button" class="btn btn-success" onclick="processPayment(${item.id}, 'verify')">
+                    Approve & Generate Coupons
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+      } catch (err) {
+        container.innerHTML = '<div class="card p-3 text-center text-error">Failed to load pending payments queue.</div>';
+      }
+    }
+
+    async function processPayment(paymentId, action) {
+      const notes = document.getElementById(`notes-${paymentId}`)?.value.trim() || '';
+
+      const actionText = action === 'verify' ? 'Approve and generate coupons for' : 'Reject';
+      if (!confirm(`Are you sure you want to ${actionText} payment #${paymentId}?`)) {
+        return;
+      }
+
+      try {
+        await api(`/api/admin/payments/${paymentId}/verify`, {
+          method: 'PUT',
+          body: { action, notes }
+        });
+
+        showToast(`Payment #${paymentId} successfully ${action === 'verify' ? 'verified' : 'rejected'}`, 'success');
+        loadPendingPayments();
+      } catch (err) {
+        // Handled by api()
+      }
+    }
+
+    function openImageModal(src) {
+      document.getElementById('modal-img').src = src;
+      document.getElementById('image-modal').classList.add('show');
+    }
+
+    function closeImageModal() {
+      document.getElementById('image-modal').classList.remove('show');
+      document.getElementById('modal-img').src = '';
+    }
+  </script>
+</body>
+</html>

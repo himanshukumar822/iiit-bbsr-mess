@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy Coupons - IIIT Mess</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">M</div>
+        <div>
+          <div class="brand-title">IIIT Mess</div>
+          <div class="brand-subtitle">Student Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Dashboard
+        </a>
+        <a href="menu.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          Weekly Menu
+        </a>
+        <a href="buy-coupon.html" class="nav-link active">
+          <svg viewBox="0 0 24 24"><path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm13-6v11c0 1.1-.9 2-2 2H4v-2h17V7h2z"/></svg>
+          Buy Coupons
+        </a>
+        <a href="my-coupons.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm-1 14H5c-.55 0-1-.45-1-1v-5h16v5c0 .55-.45 1-1 1zm1-10H4V6h16v2z"/></svg>
+          My Coupons
+        </a>
+        <a href="mess-leave.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          Mess Leave
+        </a>
+        <a href="complaints.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
+          Complaints
+        </a>
+        <a href="payment-history.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+          Payment History
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-outline btn-block btn-sm" data-logout>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="sidebar-toggle" class="menu-toggle-btn" aria-label="Toggle Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </button>
+          <h2>Buy Meal Coupons</h2>
+        </div>
+        <div class="user-badge">
+          <div id="user-avatar" class="user-avatar">S</div>
+          <div>
+            <div id="user-name" class="fw-bold">Student</div>
+            <div id="user-roll" class="text-xs text-muted">Roll No</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <!-- Step Wizard Indicator -->
+        <div class="step-nav">
+          <div class="step-item active" id="step-nav-1">
+            <div class="step-circle">1</div>
+            <div class="step-title">Date Range</div>
+          </div>
+          <div class="step-item" id="step-nav-2">
+            <div class="step-circle">2</div>
+            <div class="step-title">Meals Selection</div>
+          </div>
+          <div class="step-item" id="step-nav-3">
+            <div class="step-circle">3</div>
+            <div class="step-title">Payment</div>
+          </div>
+          <div class="step-item" id="step-nav-4">
+            <div class="step-circle">4</div>
+            <div class="step-title">Confirmation</div>
+          </div>
+        </div>
+
+        <!-- Wizard Card Container -->
+        <div class="card" id="wizard-card">
+          <!-- STEP 1: Date Range -->
+          <div id="step-1" class="card-body">
+            <h3>Step 1: Choose Subscription Date Range</h3>
+            <p class="text-secondary text-sm mb-3">Select start and end dates for your coupon package.</p>
+
+            <div class="grid grid-cols-2 gap-2" style="max-width: 500px;">
+              <div class="form-group">
+                <label class="form-label" for="start-date">Start Date *</label>
+                <input type="date" id="start-date" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="end-date">End Date *</label>
+                <input type="date" id="end-date" class="form-control" required>
+              </div>
+            </div>
+
+            <div class="form-check mt-1">
+              <input type="checkbox" id="include-sunday" checked>
+              <label for="include-sunday" class="form-check-label">Include Sunday Meals (Optional opt-in)</label>
+            </div>
+
+            <div class="mt-4 flex justify-end">
+              <button type="button" class="btn btn-primary" onclick="goToStep(2)">
+                Next: Select Meals &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 2: Meals Selection -->
+          <div id="step-2" class="card-body" style="display: none;">
+            <div class="flex justify-between items-center flex-wrap gap-1 mb-2">
+              <div>
+                <h3>Step 2: Select Meals by Day</h3>
+                <p class="text-secondary text-sm">Choose which meals you wish to subscribe for each day.</p>
+              </div>
+              <div class="card p-1" style="background-color: var(--primary-light); padding: 0.5rem 1rem;">
+                <span class="text-xs text-muted">Running Total:</span>
+                <span class="fw-bold text-primary" style="font-size: 1.25rem;" id="running-total">₹0.00</span>
+              </div>
+            </div>
+
+            <!-- Meal Pricing Note -->
+            <div class="text-xs text-muted mb-3 flex gap-2 flex-wrap">
+              <span>Breakfast: <strong>₹30</strong></span> &bull;
+              <span>Lunch: <strong>₹50</strong></span> &bull;
+              <span>Snacks: <strong>₹15</strong></span> &bull;
+              <span>Dinner: <strong>₹50</strong></span>
+            </div>
+
+            <div class="flex gap-1 mb-3 flex-wrap">
+              <button type="button" class="btn btn-outline btn-sm" onclick="selectAllWeekdays()">Select All (All Meals)</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="selectLunchDinnerOnly()">Lunch & Dinner Only</button>
+              <button type="button" class="btn btn-outline btn-sm" onclick="clearAllSelections()">Clear All</button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Day of Week</th>
+                    <th>Breakfast (₹30)</th>
+                    <th>Lunch (₹50)</th>
+                    <th>Snacks (₹15)</th>
+                    <th>Dinner (₹50)</th>
+                  </tr>
+                </thead>
+                <tbody id="days-selection-body">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mt-4 flex justify-between">
+              <button type="button" class="btn btn-outline" onclick="goToStep(1)">&larr; Back</button>
+              <button type="button" class="btn btn-primary" onclick="goToStep(3)">Next: Payment &rarr;</button>
+            </div>
+          </div>
+
+          <!-- STEP 3: Payment Method -->
+          <div id="step-3" class="card-body" style="display: none;">
+            <h3>Step 3: Select Payment Method</h3>
+            <p class="text-secondary text-sm mb-3">
+              Total Meal Cost: <strong id="step3-total-cost">₹0.00</strong> &bull;
+              Payable After Wallet: <strong class="text-primary" id="step3-amount">₹0.00</strong>
+            </p>
+
+            <!-- Mess Wallet Option -->
+            <div id="wallet-apply-box" class="card p-2 mb-3" style="display: none; background-color: var(--accent-light); border: 1px solid var(--accent-border);">
+              <div class="flex justify-between items-center flex-wrap gap-1">
+                <label class="form-check mb-0">
+                  <input type="checkbox" id="use-wallet-checkbox" checked onchange="updatePayableBreakdown()">
+                  <span class="form-check-label fw-bold text-success">
+                    Apply Mess Wallet Balance (<span id="available-wallet-text">₹0.00</span> available)
+                  </span>
+                </label>
+                <span class="text-sm fw-bold text-success" id="wallet-discount-text">-₹0.00</span>
+              </div>
+            </div>
+
+            <div id="wallet-full-cover-note" class="card p-2 mb-3" style="display: none; background-color: var(--primary-light); border: 1px solid var(--primary-border);">
+              <strong class="text-primary">100% Covered by Mess Wallet!</strong>
+              <p class="text-xs text-secondary mt-1">No cash or online payment is needed — your coupons will activate immediately when you confirm.</p>
+            </div>
+
+            <div id="payment-methods-section" class="grid grid-cols-2 gap-2 mb-3">
+              <div class="card p-2" style="border: 2px solid var(--border); cursor: pointer;" id="method-card-cash" onclick="selectPaymentMethod('cash')">
+                <div class="form-check">
+                  <input type="radio" name="payment_method" id="pay-cash" value="cash" checked>
+                  <label for="pay-cash" class="form-check-label fw-bold">Pay in Cash</label>
+                </div>
+                <p class="text-xs text-muted mt-1">Pay at the mess office counter. Admin will verify upon receipt.</p>
+              </div>
+
+              <div class="card p-2" style="border: 2px solid var(--border); cursor: pointer;" id="method-card-online" onclick="selectPaymentMethod('online')">
+                <div class="form-check">
+                  <input type="radio" name="payment_method" id="pay-online" value="online">
+                  <label for="pay-online" class="form-check-label fw-bold">Online Payment (UPI / QR)</label>
+                </div>
+                <p class="text-xs text-muted mt-1">Pay via UPI and upload transaction screenshot for verification.</p>
+              </div>
+            </div>
+
+            <!-- Online Payment Upload Box -->
+            <div id="online-upload-section" style="display: none;" class="card p-2 mb-3" style="background-color: var(--surface-alt);">
+              <h4 class="mb-1">Mess UPI Details</h4>
+              <p class="text-sm text-secondary mb-2">UPI ID: <strong>mess.iiitbbsr@hdfcbank</strong> | Account: IIIT Bhubaneswar Mess Fund</p>
+
+              <div class="form-group">
+                <label class="form-label" for="screenshot-file">Upload Payment Screenshot * (JPG, PNG, max 5MB)</label>
+                <input type="file" id="screenshot-file" class="form-control" accept="image/*">
+                <div class="form-text" id="screenshot-filename">No file selected</div>
+              </div>
+            </div>
+
+            <div class="mt-4 flex justify-between">
+              <button type="button" class="btn btn-outline" onclick="goToStep(2)">&larr; Back</button>
+              <button type="button" class="btn btn-primary" onclick="goToStep(4)">Review & Confirm &rarr;</button>
+            </div>
+          </div>
+
+          <!-- STEP 4: Confirmation Summary -->
+          <div id="step-4" class="card-body" style="display: none;">
+            <h3>Step 4: Review & Confirm Order</h3>
+            <p class="text-secondary text-sm mb-3">Please verify the details below before placing your order.</p>
+
+            <div class="card p-3 mb-3" style="background-color: var(--surface-alt);">
+              <div class="grid grid-cols-2 gap-2 mb-2">
+                <div>
+                  <span class="text-xs text-muted">DATE RANGE</span>
+                  <div class="fw-bold" id="confirm-dates">-</div>
+                </div>
+                <div>
+                  <span class="text-xs text-muted">PAYMENT METHOD</span>
+                  <div class="fw-bold" id="confirm-method">-</div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2 mb-2">
+                <div>
+                  <span class="text-xs text-muted">TOTAL MEALS SELECTED</span>
+                  <div class="fw-bold" id="confirm-meals-count">0 meals</div>
+                </div>
+                <div>
+                  <span class="text-xs text-muted">TOTAL AMOUNT TO PAY</span>
+                  <div class="fw-bold text-primary" style="font-size: 1.4rem;" id="confirm-amount">₹0.00</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-between items-center">
+              <button type="button" class="btn btn-outline" onclick="goToStep(3)">&larr; Back</button>
+              <button type="button" id="submit-order-btn" class="btn btn-success btn-lg" onclick="submitOrder()">
+                Confirm & Place Order
+              </button>
+            </div>
+          </div>
+
+          <!-- SUCCESS SCREEN -->
+          <div id="step-success" class="card-body" style="display: none; text-align: center; padding: 3rem 1.5rem;">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🎉</div>
+            <h2 class="text-success mb-1">Coupon Order Placed Successfully!</h2>
+            <p id="success-message" class="text-secondary mb-3" style="max-width: 500px; margin-left: auto; margin-right: auto;">
+              Your order has been recorded with status <strong>Pending Verification</strong>.
+              Coupons will become active once mess administration verifies your payment.
+            </p>
+            <div class="flex justify-center gap-2">
+              <a href="payment-history.html" class="btn btn-primary">View Payment History</a>
+              <a href="my-coupons.html" class="btn btn-outline">Go to My Coupons</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    let currentStep = 1;
+    let studentWalletBalance = 0;
+    const prices = { breakfast: 30, lunch: 50, snacks: 15, dinner: 50 };
+    const daysList = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    // Selection state: { Monday: ['breakfast', 'lunch'], ... }
+    let selectedMeals = {
+      Monday: ['breakfast', 'lunch', 'dinner'],
+      Tuesday: ['breakfast', 'lunch', 'dinner'],
+      Wednesday: ['breakfast', 'lunch', 'dinner'],
+      Thursday: ['breakfast', 'lunch', 'dinner'],
+      Friday: ['breakfast', 'lunch', 'dinner'],
+      Saturday: ['breakfast', 'lunch', 'dinner'],
+      Sunday: ['breakfast', 'lunch', 'dinner']
+    };
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await checkAuth('student');
+      if (!user) return;
+
+      studentWalletBalance = parseFloat(user.wallet_balance) || 0;
+      if (studentWalletBalance > 0) {
+        document.getElementById('wallet-apply-box').style.display = 'block';
+        document.getElementById('available-wallet-text').textContent = formatCurrency(studentWalletBalance);
+      }
+
+      // Default date range: today to today + 6 days (IST)
+      const todayStr = getISTTodayString();
+      const nextWeekStr = addISTDays(todayStr, 6);
+
+      document.getElementById('start-date').value = todayStr;
+      document.getElementById('end-date').value = nextWeekStr;
+      document.getElementById('start-date').min = todayStr;
+
+      renderDaysTable();
+      calculateTotal();
+    });
+
+    function getPayableBreakdown() {
+      const totalCost = calculateTotal();
+      const useWallet = studentWalletBalance > 0 && document.getElementById('use-wallet-checkbox')?.checked;
+      const walletUsed = useWallet ? Math.min(studentWalletBalance, totalCost) : 0;
+      const payableAmount = Math.max(0, parseFloat((totalCost - walletUsed).toFixed(2)));
+      return { totalCost, walletUsed, payableAmount, useWallet };
+    }
+
+    function updatePayableBreakdown() {
+      const { totalCost, walletUsed, payableAmount } = getPayableBreakdown();
+      document.getElementById('step3-total-cost').textContent = formatCurrency(totalCost);
+      document.getElementById('step3-amount').textContent = formatCurrency(payableAmount);
+      document.getElementById('wallet-discount-text').textContent = `-${formatCurrency(walletUsed)}`;
+
+      const isFullyCovered = payableAmount === 0 && totalCost > 0;
+      document.getElementById('wallet-full-cover-note').style.display = isFullyCovered ? 'block' : 'none';
+      document.getElementById('payment-methods-section').style.display = isFullyCovered ? 'none' : 'grid';
+      if (isFullyCovered) {
+        document.getElementById('online-upload-section').style.display = 'none';
+      } else {
+        const method = document.querySelector('input[name="payment_method"]:checked')?.value || 'cash';
+        document.getElementById('online-upload-section').style.display = (method === 'online') ? 'block' : 'none';
+      }
+    }
+
+    function goToStep(step) {
+      if (step === 2) {
+        const start = document.getElementById('start-date').value;
+        const end = document.getElementById('end-date').value;
+        if (!start || !end) {
+          showToast('Please select both start and end dates', 'warning');
+          return;
+        }
+        const todayStr = getISTTodayString();
+        if (start < todayStr) {
+          showToast('Start date cannot be in the past', 'warning');
+          return;
+        }
+        if (end < start) {
+          showToast('End date cannot be earlier than start date', 'warning');
+          return;
+        }
+        renderDaysTable();
+        calculateTotal();
+      }
+
+      if (step === 3) {
+        const total = calculateTotal();
+        if (total <= 0) {
+          showToast('Please select at least one meal to continue', 'warning');
+          return;
+        }
+        updatePayableBreakdown();
+      }
+
+      if (step === 4) {
+        const { totalCost, walletUsed, payableAmount } = getPayableBreakdown();
+        if (totalCost <= 0) {
+          showToast('Please select at least one meal to continue', 'warning');
+          return;
+        }
+        const method = document.querySelector('input[name="payment_method"]:checked').value;
+        if (payableAmount > 0 && method === 'online') {
+          const fileInput = document.getElementById('screenshot-file');
+          if (!fileInput.files || fileInput.files.length === 0) {
+            showToast('Please upload payment screenshot for online payment', 'warning');
+            return;
+          }
+        }
+
+        // Populate confirmation
+        document.getElementById('confirm-dates').textContent =
+          `${formatDate(document.getElementById('start-date').value)} to ${formatDate(document.getElementById('end-date').value)}`;
+        document.getElementById('confirm-method').textContent =
+          payableAmount === 0
+            ? 'MESS WALLET (100%)'
+            : walletUsed > 0
+              ? `${method.toUpperCase()} + WALLET (-${formatCurrency(walletUsed)})`
+              : method.toUpperCase();
+        document.getElementById('confirm-amount').textContent = formatCurrency(payableAmount);
+
+        // Count total meals across range
+        const totalMealsCount = countTotalMealsInRange();
+        document.getElementById('confirm-meals-count').textContent = `${totalMealsCount} meals`;
+      }
+
+      // Update visible step view
+      for (let i = 1; i <= 4; i++) {
+        const stepDiv = document.getElementById(`step-${i}`);
+        const navDiv = document.getElementById(`step-nav-${i}`);
+        if (stepDiv) stepDiv.style.display = (i === step) ? 'block' : 'none';
+        if (navDiv) {
+          navDiv.classList.remove('active', 'completed');
+          if (i === step) navDiv.classList.add('active');
+          else if (i < step) navDiv.classList.add('completed');
+        }
+      }
+      currentStep = step;
+    }
+
+    function renderDaysTable() {
+      const tbody = document.getElementById('days-selection-body');
+      const incSunday = document.getElementById('include-sunday').checked;
+
+      tbody.innerHTML = daysList.map(day => {
+        if (day === 'Sunday' && !incSunday) return '';
+
+        const currentDayMeals = selectedMeals[day] || [];
+        return `
+          <tr>
+            <td><strong>${day}</strong></td>
+            <td>
+              <label class="form-check">
+                <input type="checkbox" onchange="toggleMeal('${day}', 'breakfast', this.checked)" ${currentDayMeals.includes('breakfast') ? 'checked' : ''}>
+                <span>Breakfast</span>
+              </label>
+            </td>
+            <td>
+              <label class="form-check">
+                <input type="checkbox" onchange="toggleMeal('${day}', 'lunch', this.checked)" ${currentDayMeals.includes('lunch') ? 'checked' : ''}>
+                <span>Lunch</span>
+              </label>
+            </td>
+            <td>
+              <label class="form-check">
+                <input type="checkbox" onchange="toggleMeal('${day}', 'snacks', this.checked)" ${currentDayMeals.includes('snacks') ? 'checked' : ''}>
+                <span>Snacks</span>
+              </label>
+            </td>
+            <td>
+              <label class="form-check">
+                <input type="checkbox" onchange="toggleMeal('${day}', 'dinner', this.checked)" ${currentDayMeals.includes('dinner') ? 'checked' : ''}>
+                <span>Dinner</span>
+              </label>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function toggleMeal(day, meal, checked) {
+      if (!selectedMeals[day]) selectedMeals[day] = [];
+      if (checked) {
+        if (!selectedMeals[day].includes(meal)) selectedMeals[day].push(meal);
+      } else {
+        selectedMeals[day] = selectedMeals[day].filter(m => m !== meal);
+      }
+      calculateTotal();
+    }
+
+    function selectAllWeekdays() {
+      daysList.forEach(d => {
+        selectedMeals[d] = ['breakfast', 'lunch', 'snacks', 'dinner'];
+      });
+      renderDaysTable();
+      calculateTotal();
+    }
+
+    function selectLunchDinnerOnly() {
+      daysList.forEach(d => {
+        selectedMeals[d] = ['lunch', 'dinner'];
+      });
+      renderDaysTable();
+      calculateTotal();
+    }
+
+    function clearAllSelections() {
+      daysList.forEach(d => {
+        selectedMeals[d] = [];
+      });
+      renderDaysTable();
+      calculateTotal();
+    }
+
+    function calculateTotal() {
+      const start = document.getElementById('start-date').value;
+      const end = document.getElementById('end-date').value;
+      const incSunday = document.getElementById('include-sunday').checked;
+
+      if (!start || !end) return 0;
+
+      let total = 0;
+      let curr = new Date(start + 'T00:00:00');
+      const endDate = new Date(end + 'T00:00:00');
+
+      while (curr <= endDate) {
+        const dayName = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(curr);
+        if (dayName !== 'Sunday' || incSunday) {
+          const meals = selectedMeals[dayName] || [];
+          for (const m of meals) {
+            total += (prices[m] || 0);
+          }
+        }
+        curr.setDate(curr.getDate() + 1);
+      }
+
+      document.getElementById('running-total').textContent = formatCurrency(total);
+      document.getElementById('step3-amount').textContent = formatCurrency(total);
+      return total;
+    }
+
+    function countTotalMealsInRange() {
+      const start = document.getElementById('start-date').value;
+      const end = document.getElementById('end-date').value;
+      const incSunday = document.getElementById('include-sunday').checked;
+
+      let count = 0;
+      let curr = new Date(start + 'T00:00:00');
+      const endDate = new Date(end + 'T00:00:00');
+
+      while (curr <= endDate) {
+        const dayName = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(curr);
+        if (dayName !== 'Sunday' || incSunday) {
+          count += (selectedMeals[dayName] || []).length;
+        }
+        curr.setDate(curr.getDate() + 1);
+      }
+      return count;
+    }
+
+    function selectPaymentMethod(method) {
+      document.getElementById('pay-cash').checked = (method === 'cash');
+      document.getElementById('pay-online').checked = (method === 'online');
+
+      document.getElementById('method-card-cash').style.borderColor = (method === 'cash') ? 'var(--primary)' : 'var(--border)';
+      document.getElementById('method-card-online').style.borderColor = (method === 'online') ? 'var(--primary)' : 'var(--border)';
+      document.getElementById('online-upload-section').style.display = (method === 'online') ? 'block' : 'none';
+    }
+
+    async function submitOrder() {
+      const submitBtn = document.getElementById('submit-order-btn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner"></span> Placing Order...';
+
+      const startDate = document.getElementById('start-date').value;
+      const endDate = document.getElementById('end-date').value;
+      const includesSunday = document.getElementById('include-sunday').checked;
+      const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+      const { totalCost, payableAmount, useWallet } = getPayableBreakdown();
+
+      const formData = new FormData();
+      formData.append('start_date', startDate);
+      formData.append('end_date', endDate);
+      formData.append('meals_selected', JSON.stringify(selectedMeals));
+      formData.append('includes_sunday', includesSunday);
+      formData.append('payment_method', paymentMethod);
+      formData.append('use_wallet', useWallet);
+      formData.append('amount', payableAmount);
+
+      if (payableAmount > 0 && paymentMethod === 'online') {
+        const fileInput = document.getElementById('screenshot-file');
+        if (fileInput.files[0]) {
+          formData.append('screenshot', fileInput.files[0]);
+        }
+      }
+
+      try {
+        const res = await api('/api/student/coupons/buy', {
+          method: 'POST',
+          body: formData
+        });
+
+        // Hide steps, show success
+        for (let i = 1; i <= 4; i++) {
+          document.getElementById(`step-${i}`).style.display = 'none';
+        }
+        if (res.order?.payment_status === 'verified') {
+          document.getElementById('success-message').innerHTML =
+            'Paid 100% using your <strong>Mess Wallet</strong>! Your meal coupons are <strong>Active</strong> right now.';
+        }
+        document.getElementById('step-success').style.display = 'block';
+        showToast(res.message || 'Coupon order placed successfully!', 'success');
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Confirm & Place Order';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Coupons - IIIT Mess</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">M</div>
+        <div>
+          <div class="brand-title">IIIT Mess</div>
+          <div class="brand-subtitle">Student Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Dashboard
+        </a>
+        <a href="menu.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          Weekly Menu
+        </a>
+        <a href="buy-coupon.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm13-6v11c0 1.1-.9 2-2 2H4v-2h17V7h2z"/></svg>
+          Buy Coupons
+        </a>
+        <a href="my-coupons.html" class="nav-link active">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm-1 14H5c-.55 0-1-.45-1-1v-5h16v5c0 .55-.45 1-1 1zm1-10H4V6h16v2z"/></svg>
+          My Coupons
+        </a>
+        <a href="mess-leave.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          Mess Leave
+        </a>
+        <a href="complaints.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
+          Complaints
+        </a>
+        <a href="payment-history.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+          Payment History
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-outline btn-block btn-sm" data-logout>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="sidebar-toggle" class="menu-toggle-btn" aria-label="Toggle Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </button>
+          <h2>My Meal Coupons</h2>
+        </div>
+        <div class="user-badge">
+          <div id="user-avatar" class="user-avatar">S</div>
+          <div>
+            <div id="user-name" class="fw-bold">Student</div>
+            <div id="user-roll" class="text-xs text-muted">Roll No</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Purchased Meal Coupons</h1>
+            <p class="page-description">View, track, or skip your active meal coupons</p>
+          </div>
+          <a href="buy-coupon.html" class="btn btn-primary">+ Buy More Coupons</a>
+        </div>
+
+        <!-- Filter Card -->
+        <div class="card p-2 mb-3">
+          <div class="flex gap-2 flex-wrap items-center">
+            <div class="form-group mb-0" style="min-width: 180px;">
+              <label class="form-label" for="filter-status">Filter by Status</label>
+              <select id="filter-status" class="form-select">
+                <option value="">All Statuses</option>
+                <option value="active">Active</option>
+                <option value="used">Used / Claimed</option>
+                <option value="skipped">Skipped</option>
+                <option value="on_leave">On Leave</option>
+                <option value="expired">Expired</option>
+              </select>
+            </div>
+
+            <div class="form-group mb-0" style="min-width: 180px;">
+              <label class="form-label" for="filter-date">Filter by Date</label>
+              <input type="date" id="filter-date" class="form-control">
+            </div>
+
+            <div style="margin-top: 1.5rem;">
+              <button class="btn btn-outline" onclick="resetFilters()">Reset</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coupons List Container -->
+        <div id="coupons-container">
+          <div class="loading-container"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await checkAuth('student');
+      if (!user) return;
+
+      loadCoupons();
+
+      document.getElementById('filter-status').addEventListener('change', loadCoupons);
+      document.getElementById('filter-date').addEventListener('change', loadCoupons);
+    });
+
+    function resetFilters() {
+      document.getElementById('filter-status').value = '';
+      document.getElementById('filter-date').value = '';
+      loadCoupons();
+    }
+
+    async function loadCoupons() {
+      const container = document.getElementById('coupons-container');
+      container.innerHTML = '<div class="loading-container"><div class="spinner"></div></div>';
+
+      const status = document.getElementById('filter-status').value;
+      const date = document.getElementById('filter-date').value;
+
+      let query = [];
+      if (status) query.push(`status=${encodeURIComponent(status)}`);
+      if (date) query.push(`date=${encodeURIComponent(date)}`);
+      const qs = query.length > 0 ? `?${query.join('&')}` : '';
+
+      try {
+        const res = await api(`/api/student/coupons${qs}`);
+        const coupons = res.coupons || [];
+
+        if (coupons.length === 0) {
+          container.innerHTML = `
+            <div class="card p-4 text-center">
+              <p class="text-muted">No coupons found matching your criteria.</p>
+              <div class="mt-2"><a href="buy-coupon.html" class="btn btn-primary btn-sm">Buy Coupons</a></div>
+            </div>
+          `;
+          return;
+        }
+
+        // Group coupons by meal_date
+        const groups = {};
+        coupons.forEach(c => {
+          const dStr = String(c.meal_date).split('T')[0];
+          if (!groups[dStr]) groups[dStr] = [];
+          groups[dStr].push(c);
+        });
+
+        const todayIST = getISTTodayString();
+        const sortedDates = Object.keys(groups).sort((a, b) => new Date(b) - new Date(a));
+
+        container.innerHTML = sortedDates.map(dateKey => {
+          const list = groups[dateKey];
+          const isToday = dateKey === todayIST;
+          return `
+            <div class="card mb-3">
+              <div class="card-header" style="background-color: var(--surface-alt);">
+                <h3>${formatDate(dateKey)} ${isToday ? '<span class="badge badge-active" style="margin-left:6px;">Today</span>' : ''}</h3>
+                <span class="text-xs text-muted">${list.length} meal(s)</span>
+              </div>
+              <div class="card-body">
+                <div class="grid grid-cols-4 gap-2">
+                  ${list.map(coupon => renderCouponCard(coupon, dateKey, todayIST)).join('')}
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+      } catch (err) {
+        console.error('Error loading coupons:', err);
+      }
+    }
+
+    function renderCouponCard(coupon, dateKey, todayIST) {
+      const canSkip = coupon.status === 'active' && dateKey > todayIST;
+      const isTodayActive = coupon.status === 'active' && dateKey === todayIST;
+
+      return `
+        <div class="card p-2" style="border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <h4 style="text-transform: capitalize; color: var(--primary);">${coupon.meal_type}</h4>
+              ${renderBadge(coupon.status)}
+            </div>
+            <div class="text-xs text-muted mb-2">Source: ${coupon.source}</div>
+          </div>
+          <div>
+            ${canSkip ? `
+              <button class="btn btn-danger-outline btn-sm btn-block" onclick="skipCoupon(${coupon.id})">
+                Skip &amp; Refund to Wallet
+              </button>
+            ` : isTodayActive ? `
+              <span class="text-xs text-muted">Same-day skip disabled</span>
+            ` : `
+              <span class="text-xs text-muted">
+                ${coupon.status === 'used' ? 'Claimed ' + (coupon.claimed_at ? formatDate(coupon.claimed_at) : '') : ''}
+                ${coupon.status === 'skipped' || coupon.status === 'on_leave' ? 'Refunded to Mess Wallet' : ''}
+              </span>
+            `}
+          </div>
+        </div>
+      `;
+    }
+
+    async function skipCoupon(couponId) {
+      if (!confirm('Are you sure you want to skip this future meal? Its meal price will be refunded to your Mess Wallet.')) {
+        return;
+      }
+
+      try {
+        const res = await api(`/api/student/coupons/${couponId}/skip`, { method: 'POST' });
+        showToast(res.message || 'Meal skipped and refunded to Mess Wallet', 'success');
+        if (res.wallet_balance !== undefined) {
+          const walletEl = document.getElementById('user-wallet');
+          if (walletEl) walletEl.textContent = formatCurrency(res.wallet_balance);
+        }
+        loadCoupons();
+      } catch (err) {
+        // Handled by api() toast
+      }
+    }
+  </script>
+</body>
+</html>

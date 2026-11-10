@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration - IIIT Bhubaneswar Mess</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="auth-wrapper">
+    <div class="auth-card" style="max-width: 520px;">
+      <div class="auth-header">
+        <div class="logo-badge">M</div>
+        <h1>Student Registration</h1>
+        <p>IIIT Bhubaneswar Mess Management Portal</p>
+      </div>
+
+      <form id="register-form">
+        <div class="grid grid-cols-2 gap-2">
+          <div class="form-group">
+            <label class="form-label" for="name">Full Name *</label>
+            <input type="text" id="name" class="form-control" placeholder="e.g. Rahul Sharma" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="roll_no">Roll Number *</label>
+            <input type="text" id="roll_no" class="form-control" placeholder="e.g. B121045" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Institute Email *</label>
+          <input type="email" id="email" class="form-control" placeholder="e.g. b121045@iiitbbsr.ac.in" required>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div class="form-group">
+            <label class="form-label" for="hostel">Hostel *</label>
+            <select id="hostel" class="form-select" required>
+              <option value="" disabled selected>Select Hostel</option>
+              <option value="BH1">Boys Hostel 1 (BH1)</option>
+              <option value="BH2">Boys Hostel 2 (BH2)</option>
+              <option value="BH3">Boys Hostel 3 (BH3)</option>
+              <option value="GH1">Girls Hostel 1 (GH1)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="room_no">Room Number</label>
+            <input type="text" id="room_no" class="form-control" placeholder="e.g. 312">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div class="form-group">
+            <label class="form-label" for="password">Password *</label>
+            <input type="password" id="password" class="form-control" placeholder="Min. 6 characters" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="confirm_password">Confirm Password *</label>
+            <input type="password" id="confirm_password" class="form-control" placeholder="Re-enter password" required>
+          </div>
+        </div>
+
+        <button type="submit" id="submit-btn" class="btn btn-primary btn-block btn-lg mt-2">
+          Create Student Account
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        <p>Already registered? <a href="index.html">Sign in here</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    const form = document.getElementById('register-form');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const roll_no = document.getElementById('roll_no').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const hostel = document.getElementById('hostel').value;
+      const room_no = document.getElementById('room_no').value.trim();
+      const password = document.getElementById('password').value;
+      const confirm_password = document.getElementById('confirm_password').value;
+
+      if (!name || !roll_no || !email || !hostel || !password) {
+        showToast('Please fill in all required fields', 'warning');
+        return;
+      }
+
+      const rollRegex = /^[A-Za-z0-9_-]{4,20}$/;
+      if (!rollRegex.test(roll_no)) {
+        showToast('Roll number must be 4-20 alphanumeric characters (e.g. B121045)', 'warning');
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        showToast('Please enter a valid institute email address', 'warning');
+        return;
+      }
+
+      if (password.length < 6) {
+        showToast('Password must be at least 6 characters long', 'warning');
+        return;
+      }
+
+      if (password !== confirm_password) {
+        showToast('Passwords do not match', 'error');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner"></span> Registering...';
+
+      try {
+        await api('/api/auth/register', {
+          method: 'POST',
+          body: { name, roll_no, email, hostel, room_no, password }
+        });
+
+        showToast('Registration successful! Redirecting to login...', 'success');
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1200);
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Create Student Account';
+      }
+    });
+  </script>
+</body>
+</html>

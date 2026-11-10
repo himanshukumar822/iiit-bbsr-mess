@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard - IIIT Mess</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">M</div>
+        <div>
+          <div class="brand-title">IIIT Mess</div>
+          <div class="brand-subtitle">Student Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html" class="nav-link active">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Dashboard
+        </a>
+        <a href="menu.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          Weekly Menu
+        </a>
+        <a href="buy-coupon.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm13-6v11c0 1.1-.9 2-2 2H4v-2h17V7h2z"/></svg>
+          Buy Coupons
+        </a>
+        <a href="my-coupons.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm-1 14H5c-.55 0-1-.45-1-1v-5h16v5c0 .55-.45 1-1 1zm1-10H4V6h16v2z"/></svg>
+          My Coupons
+        </a>
+        <a href="mess-leave.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          Mess Leave
+        </a>
+        <a href="complaints.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
+          Complaints
+        </a>
+        <a href="payment-history.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+          Payment History
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-outline btn-block btn-sm" data-logout>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="sidebar-toggle" class="menu-toggle-btn" aria-label="Toggle Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </button>
+          <h2>Dashboard</h2>
+        </div>
+        <div class="user-badge">
+          <div id="user-avatar" class="user-avatar">S</div>
+          <div>
+            <div id="user-name" class="fw-bold">Student</div>
+            <div id="user-roll" class="text-xs text-muted">Roll No</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <!-- Welcome Card -->
+        <div class="card mb-3" style="background: linear-gradient(to right, #ffffff, #f0f6ff);">
+          <div class="card-body flex justify-between items-center flex-wrap gap-2">
+            <div>
+              <h2>Welcome back, <span id="welcome-name">Student</span>!</h2>
+              <p class="mt-1">
+                Hostel: <strong id="student-hostel">-</strong> | Room: <strong id="student-room">-</strong> |
+                Mess Wallet: <strong class="text-success" id="dashboard-wallet">₹0.00</strong>
+              </p>
+            </div>
+            <div class="flex gap-1 flex-wrap">
+              <a href="buy-coupon.html" class="btn btn-primary">
+                Buy Coupons
+              </a>
+              <a href="mess-leave.html" class="btn btn-outline">
+                Apply Leave
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Today's Meal Status Overview -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <h3>Today's Meals & Coupon Status (<span id="today-date">-</span>)</h3>
+            <span id="active-coupon-count-badge" class="badge badge-active">0 Active Today</span>
+          </div>
+          <div class="card-body">
+            <div class="grid grid-cols-4 gap-2" id="meals-grid">
+              <div class="loading-container"><div class="spinner"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Today's Menu Details -->
+        <div class="card">
+          <div class="card-header flex justify-between items-center">
+            <h3>Today's Menu Details (<span id="today-day-name">-</span>)</h3>
+            <a href="menu.html" class="text-sm">View Full Weekly Menu &rarr;</a>
+          </div>
+          <div class="card-body">
+            <div id="today-menu-list" class="grid grid-cols-2 gap-2">
+              <div class="loading-container"><div class="spinner"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await checkAuth('student');
+      if (!user) return;
+
+      document.getElementById('welcome-name').textContent = user.name;
+      document.getElementById('student-hostel').textContent = user.hostel || 'N/A';
+      document.getElementById('student-room').textContent = user.room_no || 'N/A';
+      document.getElementById('dashboard-wallet').textContent = formatCurrency(user.wallet_balance || 0);
+
+      // Load today's IST date
+      const todayStr = getISTTodayString();
+      document.getElementById('today-date').textContent = formatDate(todayStr);
+
+      try {
+        // Fetch today's menu & today's coupons in parallel
+        const [menuRes, couponsRes] = await Promise.all([
+          api('/api/student/menu/today'),
+          api(`/api/student/coupons?date=${todayStr}`)
+        ]);
+
+        document.getElementById('today-day-name').textContent = menuRes.day_of_week || 'Today';
+
+        const mealTypes = ['breakfast', 'lunch', 'snacks', 'dinner'];
+        const mealTimes = {
+          breakfast: '7:30 - 9:00 AM',
+          lunch: '12:00 - 2:00 PM',
+          snacks: '4:00 - 5:00 PM',
+          dinner: '7:30 - 9:00 PM'
+        };
+
+        // Build active coupons map
+        const activeCouponsMap = {};
+        let activeCount = 0;
+        (couponsRes.coupons || []).forEach(c => {
+          if (c.status === 'active') {
+            activeCouponsMap[c.meal_type.toLowerCase()] = true;
+            activeCount++;
+          }
+        });
+
+        document.getElementById('active-coupon-count-badge').textContent = `${activeCount} Active Today`;
+
+        // Render today's 4 meals cards with Checkmark or Red X
+        const mealsGrid = document.getElementById('meals-grid');
+        mealsGrid.innerHTML = mealTypes.map(m => {
+          const hasCoupon = activeCouponsMap[m];
+          return `
+            <div class="card" style="padding: 1rem; border-top: 4px solid ${hasCoupon ? 'var(--accent)' : 'var(--error)'};">
+              <div class="flex justify-between items-center mb-1">
+                <span style="font-weight: 600; text-transform: capitalize;">${m}</span>
+                <span style="font-size: 1.25rem;">${hasCoupon ? '✅' : '❌'}</span>
+              </div>
+              <div class="text-xs text-muted mb-2">${mealTimes[m]}</div>
+              <div>
+                ${hasCoupon
+                  ? '<span class="badge badge-active">Coupon Active</span>'
+                  : '<span class="badge badge-rejected">No Coupon</span>'}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        // Render Today's Menu list
+        const menuList = document.getElementById('today-menu-list');
+        if (!menuRes.menu || menuRes.menu.length === 0) {
+          menuList.innerHTML = '<p class="text-muted">No menu set for today.</p>';
+        } else {
+          menuList.innerHTML = menuRes.menu.map(item => `
+            <div class="card" style="padding: 1rem; background-color: var(--surface-alt);">
+              <div class="flex justify-between items-center mb-1">
+                <h4 style="text-transform: capitalize; color: var(--primary);">${item.meal_type}</h4>
+                <span class="text-xs text-muted">${mealTimes[item.meal_type] || ''}</span>
+              </div>
+              <p style="font-size: 0.9rem; color: var(--text);">${item.items}</p>
+            </div>
+          `).join('');
+        }
+      } catch (err) {
+        console.error('Error loading dashboard:', err);
+      }
+    });
+  </script>
+</body>
+</html>

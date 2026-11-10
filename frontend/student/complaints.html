@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complaints & Feedback - IIIT Mess</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">M</div>
+        <div>
+          <div class="brand-title">IIIT Mess</div>
+          <div class="brand-subtitle">Student Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Dashboard
+        </a>
+        <a href="menu.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          Weekly Menu
+        </a>
+        <a href="buy-coupon.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm13-6v11c0 1.1-.9 2-2 2H4v-2h17V7h2z"/></svg>
+          Buy Coupons
+        </a>
+        <a href="my-coupons.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm-1 14H5c-.55 0-1-.45-1-1v-5h16v5c0 .55-.45 1-1 1zm1-10H4V6h16v2z"/></svg>
+          My Coupons
+        </a>
+        <a href="mess-leave.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          Mess Leave
+        </a>
+        <a href="complaints.html" class="nav-link active">
+          <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
+          Complaints
+        </a>
+        <a href="payment-history.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+          Payment History
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-outline btn-block btn-sm" data-logout>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="sidebar-toggle" class="menu-toggle-btn" aria-label="Toggle Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </button>
+          <h2>Mess Complaints & Feedback</h2>
+        </div>
+        <div class="user-badge">
+          <div id="user-avatar" class="user-avatar">S</div>
+          <div>
+            <div id="user-name" class="fw-bold">Student</div>
+            <div id="user-roll" class="text-xs text-muted">Roll No</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Submit Mess Complaint</h1>
+            <p class="page-description">Report hygiene, quality, or service issues during meal serving windows</p>
+          </div>
+        </div>
+
+        <!-- Window Timing Notification Banner -->
+        <div id="window-status-banner" class="card p-2 mb-3">
+          <!-- Dynamically filled with active meal or window warning -->
+        </div>
+
+        <!-- Complaint Form Card -->
+        <div class="card mb-4" style="max-width: 650px;">
+          <div class="card-header">
+            <h3>Raise New Complaint</h3>
+          </div>
+          <div class="card-body">
+            <form id="complaint-form">
+              <div class="grid grid-cols-2 gap-2">
+                <div class="form-group">
+                  <label class="form-label" for="meal-type">Meal Type *</label>
+                  <select id="meal-type" class="form-select" required>
+                    <option value="" disabled selected>Select Meal</option>
+                    <option value="breakfast">Breakfast (7:30 - 9:00 AM)</option>
+                    <option value="lunch">Lunch (12:00 - 2:00 PM)</option>
+                    <option value="snacks">Snacks (4:00 - 5:00 PM)</option>
+                    <option value="dinner">Dinner (7:30 - 9:00 PM)</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="category">Issue Category *</label>
+                  <select id="category" class="form-select" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="food_quality">Food Quality / Taste</option>
+                    <option value="hygiene">Hygiene & Cleanliness</option>
+                    <option value="quantity">Food Quantity / Shortage</option>
+                    <option value="staff_behavior">Staff Behavior</option>
+                    <option value="other">Other Issue</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="description">Detailed Description *</label>
+                <textarea id="description" class="form-textarea" placeholder="Describe the specific issue encountered..." required></textarea>
+              </div>
+
+              <button type="submit" id="submit-complaint-btn" class="btn btn-primary">
+                Submit Complaint
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Past Complaints List -->
+        <div class="card">
+          <div class="card-header">
+            <h3>My Complaint History</h3>
+          </div>
+          <div class="card-body" id="complaints-history-list">
+            <div class="loading-container"><div class="spinner"></div></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    const MEAL_WINDOWS = {
+      breakfast: { start: 7 * 60 + 30, end: 9 * 60, label: '7:30 - 9:00 AM' },
+      lunch: { start: 12 * 60, end: 14 * 60, label: '12:00 - 2:00 PM' },
+      snacks: { start: 16 * 60, end: 17 * 60, label: '4:00 - 5:00 PM' },
+      dinner: { start: 19 * 60 + 30, end: 21 * 60, label: '7:30 - 9:00 PM' }
+    };
+
+    function getActiveMealWindow() {
+      const now = new Date();
+      // Get IST minutes
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Kolkata',
+        hour12: false,
+        hour: 'numeric',
+        minute: 'numeric'
+      }).formatToParts(now);
+      const hour = parseInt(parts.find(p => p.type === 'hour').value, 10);
+      const min = parseInt(parts.find(p => p.type === 'minute').value, 10);
+      const totalMinutes = hour * 60 + min;
+
+      for (const [meal, w] of Object.entries(MEAL_WINDOWS)) {
+        if (totalMinutes >= w.start && totalMinutes <= w.end) {
+          return { meal, ...w };
+        }
+      }
+      return null;
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await checkAuth('student');
+      if (!user) return;
+
+      checkAndApplyWindowRestrictions();
+      loadComplaintsHistory();
+
+      document.getElementById('complaint-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const meal_type = document.getElementById('meal-type').value;
+        const category = document.getElementById('category').value;
+        const description = document.getElementById('description').value.trim();
+
+        const btn = document.getElementById('submit-complaint-btn');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span> Submitting...';
+
+        try {
+          await api('/api/student/complaints', {
+            method: 'POST',
+            body: { meal_type, category, description }
+          });
+
+          showToast('Complaint submitted successfully', 'success');
+          document.getElementById('description').value = '';
+          loadComplaintsHistory();
+        } catch (err) {
+          // Handled by api()
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Submit Complaint';
+        }
+      });
+    });
+
+    function checkAndApplyWindowRestrictions() {
+      const banner = document.getElementById('window-status-banner');
+      const mealSelect = document.getElementById('meal-type');
+      const submitBtn = document.getElementById('submit-complaint-btn');
+      const activeWin = getActiveMealWindow();
+
+      if (activeWin) {
+        banner.style.backgroundColor = 'var(--accent-light)';
+        banner.style.border = '1px solid var(--accent-border)';
+        banner.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span style="font-size: 1.25rem;">🟢</span>
+            <div>
+              <strong class="text-success">Meal Window Active: ${activeWin.meal.toUpperCase()} (${activeWin.label} IST)</strong>
+              <div class="text-xs text-secondary">You may now submit complaints or feedback for the ongoing meal service.</div>
+            </div>
+          </div>
+        `;
+        mealSelect.value = activeWin.meal;
+        submitBtn.disabled = false;
+      } else {
+        banner.style.backgroundColor = 'var(--warning-light)';
+        banner.style.border = '1px solid var(--warning-border)';
+        banner.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span style="font-size: 1.25rem;">⚠️</span>
+            <div>
+              <strong style="color: #b06000;">Complaints can only be raised during meal hours</strong>
+              <div class="text-xs text-secondary">
+                Breakfast: 7:30-9:00 AM | Lunch: 12:00-2:00 PM | Snacks: 4:00-5:00 PM | Dinner: 7:30-9:00 PM IST
+              </div>
+            </div>
+          </div>
+        `;
+        submitBtn.disabled = true;
+      }
+    }
+
+    async function loadComplaintsHistory() {
+      const listContainer = document.getElementById('complaints-history-list');
+      try {
+        const res = await api('/api/student/complaints');
+        const list = res.complaints || [];
+
+        if (list.length === 0) {
+          listContainer.innerHTML = '<p class="text-center text-muted" style="padding: 1.5rem;">No complaints raised yet.</p>';
+          return;
+        }
+
+        listContainer.innerHTML = list.map(c => `
+          <div class="card p-3 mb-2" style="border: 1px solid var(--border-light); background-color: var(--surface);">
+            <div class="flex justify-between items-center mb-1 flex-wrap gap-1">
+              <div>
+                <strong style="text-transform: capitalize; color: var(--primary);">${escapeHtml(c.meal_type)}</strong> &bull;
+                <span class="text-xs text-muted">Category: <strong>${escapeHtml(c.category.replace(/_/g, ' '))}</strong></span> &bull;
+                <span class="text-xs text-muted">${formatDate(c.meal_date)}</span>
+              </div>
+              <div>${renderBadge(c.status)}</div>
+            </div>
+            <p class="text-sm mt-1" style="color: var(--text);">${escapeHtml(c.description)}</p>
+            ${c.response ? `
+              <div class="mt-2 p-2" style="background-color: var(--surface-alt); border-radius: var(--radius-sm); border-left: 3px solid var(--primary);">
+                <div class="text-xs fw-bold text-primary">Admin Response:</div>
+                <div class="text-sm">${escapeHtml(c.response)}</div>
+              </div>
+            ` : '<div class="text-xs text-muted mt-1">Awaiting admin review</div>'}
+          </div>
+        `).join('');
+      } catch (err) {
+        listContainer.innerHTML = '<p class="text-center text-error">Failed to load complaints history.</p>';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment History - IIIT Mess</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon">M</div>
+        <div>
+          <div class="brand-title">IIIT Mess</div>
+          <div class="brand-subtitle">Student Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Dashboard
+        </a>
+        <a href="menu.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          Weekly Menu
+        </a>
+        <a href="buy-coupon.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm13-6v11c0 1.1-.9 2-2 2H4v-2h17V7h2z"/></svg>
+          Buy Coupons
+        </a>
+        <a href="my-coupons.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm-1 14H5c-.55 0-1-.45-1-1v-5h16v5c0 .55-.45 1-1 1zm1-10H4V6h16v2z"/></svg>
+          My Coupons
+        </a>
+        <a href="mess-leave.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          Mess Leave
+        </a>
+        <a href="complaints.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
+          Complaints
+        </a>
+        <a href="payment-history.html" class="nav-link active">
+          <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+          Payment History
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-outline btn-block btn-sm" data-logout>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="sidebar-toggle" class="menu-toggle-btn" aria-label="Toggle Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </button>
+          <h2>Payment History</h2>
+        </div>
+        <div class="user-badge">
+          <div id="user-avatar" class="user-avatar">S</div>
+          <div>
+            <div id="user-name" class="fw-bold">Student</div>
+            <div id="user-roll" class="text-xs text-muted">Roll No</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Transaction & Payment History</h1>
+            <p class="page-description">Detailed log of coupon orders, payments, and admin verification status</p>
+          </div>
+          <a href="buy-coupon.html" class="btn btn-primary">+ Buy Coupons</a>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <h3>Coupon Order Payments</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Payment ID</th>
+                  <th>Date & Time</th>
+                  <th>Cash/Online Paid</th>
+                  <th>Wallet Used</th>
+                  <th>Method</th>
+                  <th>Status</th>
+                  <th>Order Period</th>
+                  <th>Screenshot</th>
+                </tr>
+              </thead>
+              <tbody id="payments-table-body">
+                <tr><td colspan="8" class="loading-container"><div class="spinner"></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Mess Wallet Ledger Card -->
+        <div class="card">
+          <div class="card-header flex justify-between items-center">
+            <h3>Mess Wallet &amp; Refund Ledger</h3>
+            <span class="badge badge-active" id="ledger-wallet-balance">Balance: ₹0.00</span>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>Description / Reason</th>
+                  <th style="text-align: right;">Amount</th>
+                </tr>
+              </thead>
+              <tbody id="wallet-ledger-body">
+                <tr><td colspan="4" class="loading-container"><div class="spinner"></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Image Modal for Screenshot Preview -->
+  <div class="modal-backdrop" id="image-modal">
+    <div class="modal" style="max-width: 600px;">
+      <div class="modal-header">
+        <h3>Payment Screenshot</h3>
+        <button class="toast-close" onclick="closeImageModal()">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <img id="modal-img" src="" alt="Payment Screenshot" style="max-height: 70vh; margin: 0 auto; border-radius: var(--radius);">
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await checkAuth('student');
+      if (!user) return;
+
+      loadPayments();
+      loadWalletLedger();
+    });
+
+    async function loadPayments() {
+      const tbody = document.getElementById('payments-table-body');
+      try {
+        const res = await api('/api/student/payments');
+        const payments = res.payments || [];
+
+        if (payments.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted" style="padding: 2.5rem;">No payment records found.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = payments.map(p => {
+          let periodStr = '-';
+          if (p.start_date && p.end_date) {
+            periodStr = `${formatDate(p.start_date)} to ${formatDate(p.end_date)}`;
+          }
+
+          let screenshotCell = '<span class="text-muted">N/A</span>';
+          if (p.screenshot_path) {
+            screenshotCell = `
+              <img
+                src="${p.screenshot_path}"
+                alt="Receipt"
+                style="width: 48px; height: 48px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--border); cursor: pointer;"
+                onclick="openImageModal('${p.screenshot_path}')"
+                title="Click to view full image"
+              >
+            `;
+          }
+
+          const walletUsed = parseFloat(p.wallet_used) || 0;
+
+          return `
+            <tr>
+              <td>#${p.id}</td>
+              <td class="text-xs">${formatDate(p.created_at)}</td>
+              <td><strong class="text-primary">${formatCurrency(p.amount)}</strong></td>
+              <td>${walletUsed > 0 ? `<span class="text-success fw-bold">${formatCurrency(walletUsed)}</span>` : '<span class="text-muted">-</span>'}</td>
+              <td style="text-transform: capitalize;">${escapeHtml(p.method)}</td>
+              <td>${renderBadge(p.status)}</td>
+              <td class="text-xs text-secondary">${periodStr}</td>
+              <td>${screenshotCell}</td>
+            </tr>
+          `;
+        }).join('');
+      } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="8" class="text-center text-error" style="padding: 2rem;">Error loading payment records.</td></tr>';
+      }
+    }
+
+    async function loadWalletLedger() {
+      const tbody = document.getElementById('wallet-ledger-body');
+      try {
+        const res = await api('/api/student/wallet');
+        const balance = parseFloat(res.wallet_balance) || 0;
+        const txns = res.transactions || [];
+
+        document.getElementById('ledger-wallet-balance').textContent = `Balance: ${formatCurrency(balance)}`;
+        const topWallet = document.getElementById('user-wallet');
+        if (topWallet) topWallet.textContent = formatCurrency(balance);
+
+        if (txns.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted" style="padding: 2rem;">No wallet refunds or credits yet. Skip a future meal or take approved leave to receive refunds here.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = txns.map(t => {
+          const isCredit = t.type === 'credit';
+          return `
+            <tr>
+              <td class="text-xs">${formatDate(t.created_at)}</td>
+              <td>
+                <span class="badge ${isCredit ? 'badge-active' : 'badge-skipped'}">
+                  ${isCredit ? 'Refund Credit' : 'Order Applied'}
+                </span>
+              </td>
+              <td>${escapeHtml(t.reason)}</td>
+              <td style="text-align: right;" class="fw-bold ${isCredit ? 'text-success' : 'text-error'}">
+                ${isCredit ? '+' : '-'}${formatCurrency(t.amount)}
+              </td>
+            </tr>
+          `;
+        }).join('');
+      } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="4" class="text-center text-error" style="padding: 2rem;">Error loading wallet transactions.</td></tr>';
+      }
+    }
+
+    function openImageModal(src) {
+      document.getElementById('modal-img').src = src;
+      document.getElementById('image-modal').classList.add('show');
+    }
+
+    function closeImageModal() {
+      document.getElementById('image-modal').classList.remove('show');
+      document.getElementById('modal-img').src = '';
+    }
+  </script>
+</body>
+</html>

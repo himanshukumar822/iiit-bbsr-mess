@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Issue Spot Coupon - Admin Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon" style="background: linear-gradient(135deg, #188038, #34a853);">A</div>
+        <div>
+          <div class="brand-title">IIIT Mess</div>
+          <div class="brand-subtitle">Admin Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Dashboard
+        </a>
+        <a href="manage-menu.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          Manage Menu
+        </a>
+        <a href="verify-payments.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+          Verify Payments
+        </a>
+        <a href="mark-claims.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+          Mark Claims
+        </a>
+        <a href="spot-coupon.html" class="nav-link active">
+          <svg viewBox="0 0 24 24"><path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm13-6v11c0 1.1-.9 2-2 2H4v-2h17V7h2z"/></svg>
+          Spot Coupon
+        </a>
+        <a href="leave-requests.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          Leave Requests
+        </a>
+        <a href="complaints.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
+          Complaints
+        </a>
+        <a href="students.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+          Students
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-outline btn-block btn-sm" data-logout>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="sidebar-toggle" class="menu-toggle-btn" aria-label="Toggle Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </button>
+          <h2>Walk-in Spot Coupon</h2>
+        </div>
+        <div class="user-badge">
+          <div id="user-avatar" class="user-avatar" style="background-color: var(--accent);">A</div>
+          <div>
+            <div id="user-name" class="fw-bold">Mess Admin</div>
+            <div id="user-role" class="text-xs text-muted">ADMIN</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Issue Spot Meal Coupon</h1>
+            <p class="page-description">Immediate on-counter coupon generation and payment verification for walk-in students</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3" style="max-width: 900px;">
+          <!-- Form Card -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Spot Purchase Form</h3>
+            </div>
+            <div class="card-body">
+              <form id="spot-coupon-form">
+                <div class="form-group">
+                  <label class="form-label" for="student-roll">Student Roll Number *</label>
+                  <input
+                    type="text"
+                    id="student-roll"
+                    class="form-control"
+                    placeholder="e.g. B121045"
+                    required
+                    autofocus
+                  >
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="meal-type">Meal Type *</label>
+                  <select id="meal-type" class="form-select" required onchange="updatePriceDisplay()">
+                    <option value="breakfast">Breakfast (₹30)</option>
+                    <option value="lunch" selected>Lunch (₹50)</option>
+                    <option value="snacks">Snacks (₹15)</option>
+                    <option value="dinner">Dinner (₹50)</option>
+                  </select>
+                </div>
+
+                <div class="card p-2 mb-3" style="background-color: var(--surface-alt);">
+                  <div class="flex justify-between items-center">
+                    <span class="text-sm">Cash to Collect:</span>
+                    <strong class="text-primary" style="font-size: 1.35rem;" id="spot-price-display">₹50.00</strong>
+                  </div>
+                </div>
+
+                <button type="submit" id="issue-btn" class="btn btn-primary btn-block btn-lg">
+                  Issue Spot Coupon (Cash Collected)
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Result / Confirmation Card -->
+          <div class="card" id="result-card" style="display: none;">
+            <div class="card-header" style="background-color: var(--accent-light);">
+              <h3 class="text-success">&#10003; Spot Coupon Issued & Claimed</h3>
+            </div>
+            <div class="card-body">
+              <div class="mb-3 text-center">
+                <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🍽️</div>
+                <h3 id="res-student-name">Student Name</h3>
+                <div class="text-xs text-muted" id="res-roll-no">Roll No</div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2 mb-3 p-2" style="background-color: var(--surface-alt); border-radius: var(--radius-sm);">
+                <div>
+                  <span class="text-xs text-muted">MEAL TYPE</span>
+                  <div class="fw-bold" id="res-meal-type" style="text-transform: capitalize;">-</div>
+                </div>
+                <div>
+                  <span class="text-xs text-muted">AMOUNT COLLECTED</span>
+                  <div class="fw-bold text-success" id="res-amount">-</div>
+                </div>
+                <div>
+                  <span class="text-xs text-muted">DATE</span>
+                  <div class="text-sm" id="res-date">-</div>
+                </div>
+                <div>
+                  <span class="text-xs text-muted">STATUS</span>
+                  <div><span class="badge badge-used">Claimed</span></div>
+                </div>
+              </div>
+
+              <button type="button" class="btn btn-outline btn-block" onclick="resetSpotForm()">
+                Issue Another Spot Coupon
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    const priceMap = { breakfast: 30, lunch: 50, snacks: 15, dinner: 50 };
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await checkAuth(['admin', 'superadmin']);
+      if (!user) return;
+
+      updatePriceDisplay();
+
+      document.getElementById('spot-coupon-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const student_roll_no = document.getElementById('student-roll').value.trim();
+        const meal_type = document.getElementById('meal-type').value;
+
+        if (!student_roll_no || !meal_type) {
+          showToast('Roll number and meal type are required', 'warning');
+          return;
+        }
+
+        const rollRegex = /^[A-Za-z0-9_-]{4,20}$/;
+        if (!rollRegex.test(student_roll_no)) {
+          showToast('Roll number must be 4-20 alphanumeric characters (e.g. B121045)', 'warning');
+          return;
+        }
+
+        const btn = document.getElementById('issue-btn');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span> Issuing...';
+
+        try {
+          const res = await api('/api/admin/spot-coupon', {
+            method: 'POST',
+            body: { student_roll_no, meal_type }
+          });
+
+          showToast('Spot coupon issued and marked as claimed!', 'success');
+
+          // Populate Result Card
+          document.getElementById('res-student-name').textContent = res.student?.name || 'Student';
+          document.getElementById('res-roll-no').textContent = res.student?.roll_no || student_roll_no;
+          document.getElementById('res-meal-type').textContent = res.meal_type || meal_type;
+          document.getElementById('res-amount').textContent = formatCurrency(res.amount);
+          document.getElementById('res-date').textContent = formatDate(res.meal_date);
+
+          document.getElementById('result-card').style.display = 'block';
+        } catch (err) {
+          // Handled by api()
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Issue Spot Coupon (Cash Collected)';
+        }
+      });
+    });
+
+    function updatePriceDisplay() {
+      const meal = document.getElementById('meal-type').value;
+      const price = priceMap[meal] || 50;
+      document.getElementById('spot-price-display').textContent = formatCurrency(price);
+    }
+
+    function resetSpotForm() {
+      document.getElementById('student-roll').value = '';
+      document.getElementById('result-card').style.display = 'none';
+      document.getElementById('student-roll').focus();
+    }
+  </script>
+</body>
+</html>

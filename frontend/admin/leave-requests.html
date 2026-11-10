@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leave Requests - Admin Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-icon" style="background: linear-gradient(135deg, #188038, #34a853);">A</div>
+        <div>
+          <div class="brand-title">IIIT Mess</div>
+          <div class="brand-subtitle">Admin Portal</div>
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <a href="dashboard.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+          Dashboard
+        </a>
+        <a href="manage-menu.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          Manage Menu
+        </a>
+        <a href="verify-payments.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+          Verify Payments
+        </a>
+        <a href="mark-claims.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+          Mark Claims
+        </a>
+        <a href="spot-coupon.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm13-6v11c0 1.1-.9 2-2 2H4v-2h17V7h2z"/></svg>
+          Spot Coupon
+        </a>
+        <a href="leave-requests.html" class="nav-link active">
+          <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+          Leave Requests
+        </a>
+        <a href="complaints.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
+          Complaints
+        </a>
+        <a href="students.html" class="nav-link">
+          <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+          Students
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="btn btn-outline btn-block btn-sm" data-logout>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="sidebar-toggle" class="menu-toggle-btn" aria-label="Toggle Navigation">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          </button>
+          <h2>Manage Student Leave Requests</h2>
+        </div>
+        <div class="user-badge">
+          <div id="user-avatar" class="user-avatar" style="background-color: var(--accent);">A</div>
+          <div>
+            <div id="user-name" class="fw-bold">Mess Admin</div>
+            <div id="user-role" class="text-xs text-muted">ADMIN</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Pending Leave Requests</h1>
+            <p class="page-description">Approving a leave request marks future active coupons as 'on_leave' and refunds their meal cost to the student's Mess Wallet</p>
+          </div>
+          <button class="btn btn-outline" onclick="loadPendingLeaves()">Refresh</button>
+        </div>
+
+        <div class="card">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Roll No</th>
+                  <th>Student Name</th>
+                  <th>Hostel / Room</th>
+                  <th>Leave Duration</th>
+                  <th>Reason</th>
+                  <th>Applied On</th>
+                  <th style="text-align: right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="leave-requests-tbody">
+                <tr><td colspan="7" class="loading-container"><div class="spinner"></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = await checkAuth(['admin', 'superadmin']);
+      if (!user) return;
+
+      loadPendingLeaves();
+    });
+
+    async function loadPendingLeaves() {
+      const tbody = document.getElementById('leave-requests-tbody');
+      tbody.innerHTML = '<tr><td colspan="7" class="loading-container"><div class="spinner"></div></td></tr>';
+
+      try {
+        const res = await api('/api/admin/leave/pending');
+        const list = res.pending_leaves || [];
+
+        if (list.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted" style="padding: 2.5rem;">No pending leave applications.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = list.map(item => `
+          <tr id="leave-row-${item.id}">
+            <td><strong class="text-primary">${item.student_roll_no}</strong></td>
+            <td>${item.student_name}</td>
+            <td>${item.hostel || 'N/A'}${item.room_no ? ` / ${item.room_no}` : ''}</td>
+            <td>
+              <strong>${formatDate(item.start_date)}</strong> &rarr; <strong>${formatDate(item.end_date)}</strong>
+            </td>
+            <td>${item.reason || '-'}</td>
+            <td class="text-xs text-muted">${formatDate(item.created_at)}</td>
+            <td style="text-align: right;">
+              <div class="flex justify-end gap-1">
+                <button
+                  class="btn btn-danger-outline btn-sm"
+                  onclick="processLeave(${item.id}, 'reject', '${item.student_name}')"
+                >
+                  Reject
+                </button>
+                <button
+                  class="btn btn-success btn-sm"
+                  onclick="processLeave(${item.id}, 'approve', '${item.student_name}')"
+                >
+                  Approve
+                </button>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+
+      } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center text-error" style="padding: 2rem;">Error loading leave requests.</td></tr>';
+      }
+    }
+
+    async function processLeave(leaveId, action, studentName) {
+      const actionText = action === 'approve' ? 'Approve' : 'Reject';
+      if (!confirm(`${actionText} leave application for ${studentName}?`)) {
+        return;
+      }
+
+      try {
+        const res = await api(`/api/admin/leave/${leaveId}`, {
+          method: 'PUT',
+          body: { action }
+        });
+
+        showToast(res.message || `Leave request ${action === 'approve' ? 'approved' : 'rejected'} successfully`, 'success');
+
+        const row = document.getElementById(`leave-row-${leaveId}`);
+        if (row) {
+          row.style.opacity = '0.5';
+          setTimeout(() => loadPendingLeaves(), 300);
+        }
+      } catch (err) {
+        // Handled by api()
+      }
+    }
+  </script>
+</body>
+</html>
