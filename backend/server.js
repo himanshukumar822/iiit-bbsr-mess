@@ -11,7 +11,7 @@ const { ensureWalletSchema } = require('./utils/wallet');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Enable proxy trust for reverse proxies (Vercel / Nginx)
+// Enable proxy trust for reverse proxies (Render / Vercel / Nginx)
 app.set('trust proxy', 1);
 
 // Middleware: CORS (allow credentials for session cookies)
@@ -26,14 +26,19 @@ app.use(express.urlencoded({ extended: true }));
 
 // Middleware: Static file serving from frontend/ and uploads/
 app.use(express.static(path.join(__dirname, '../frontend')));
-if (!process.env.VERCEL) {
+if (!process.env.VERCEL && !process.env.RENDER) {
   app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 }
 
-// Persistent MySQL-backed Session Store (works locally & across Vercel serverless functions)
+// Persistent MySQL-backed Session Store (works locally, on Render, and on Vercel)
 const sessionStore = new MySQLSessionStore({
   ttlMs: 24 * 60 * 60 * 1000
 });
+
+const isSecureCookie =
+  process.env.NODE_ENV === 'production' ||
+  Boolean(process.env.RENDER) ||
+  Boolean(process.env.VERCEL);
 
 // Middleware: Express Session (24 hour maxAge, httpOnly, sameSite, proxy-aware)
 app.use(
@@ -45,20 +50,33 @@ app.use(
     proxy: true,
     cookie: {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
+      secure: isSecureCookie,
+      sameSite: 'lax',
       maxAge: 24 * 60 * 60 * 1000 // 24 hours
     }
   })
 );
 
-// Ensure schema migrations run once per cold start in serverless environments
+// Health check endpoint (responds immediately before DB schema check for Render health probes)
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    message: 'IIIT Bhubaneswar Mess Management API is running',
+    timestamp: new Date()
+  });
+});
+
+// Ensure schema migrations run once on startup / cold start
 let schemaInitPromise = null;
-app.use('/api', async (req, res, next) => {
+function ensureInitialized() {
   if (!schemaInitPromise) {
     schemaInitPromise = ensureWalletSchema().catch(() => {});
   }
-  await schemaInitPromise;
+  return schemaInitPromise;
+}
+
+app.use('/api', async (req, res, next) => {
+  await ensureInitialized();
   next();
 });
 
@@ -82,15 +100,6 @@ app.get('/login', (req, res) => {
   res.redirect('/index.html');
 });
 
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.json({
-    status: 'ok',
-    message: 'IIIT Bhubaneswar Mess Management API is running',
-    timestamp: new Date()
-  });
-});
-
 // Global error handler
 app.use((err, req, res, next) => {
   if (err instanceof multer.MulterError) {
@@ -104,12 +113,11 @@ app.use((err, req, res, next) => {
   next();
 });
 
-// Start server if run directly (local/VM)
+// Start server immediately if run directly (Render / local / VM) so platform port checks succeed fast
 if (require.main === module) {
-  ensureWalletSchema().finally(() => {
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+    ensureInitialized();
   });
 }
 

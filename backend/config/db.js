@@ -11,7 +11,9 @@ const poolConfig = {
   connectionLimit: process.env.VERCEL ? 3 : 10,
   queueLimit: 0,
   decimalNumbers: true,
-  dateStrings: ['DATE']
+  dateStrings: ['DATE'],
+  enableKeepAlive: true,
+  keepAliveInitialDelay: 0
 };
 
 // Enable SSL when connecting to cloud MySQL providers (e.g. Aiven, TiDB Cloud, PlanetScale, Railway)

@@ -7,6 +7,9 @@
     "start": "node backend/server.js",
     "dev": "node backend/server.js"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "keywords": [
     "express",
     "mysql2",

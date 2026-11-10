@@ -179,13 +179,32 @@ iiit-bbsr-mess/
 - **Rate Limiting**: `express-rate-limit` enforces a strict threshold of 10 failed attempts per 15 minutes on `/api/auth/login` and `/api/auth/register`.
 - **XSS Mitigation**: Dynamic user inputs (complaint descriptions, menu items, notes, names) are escaped via client-side sanitizers (`escapeHtml`) before DOM insertion.
 - **Strict File Upload Constraints**: Validates MIME types (`image/jpeg`, `image/png`) and file extensions, capped at 5MB.
-- **Session Hardening**: Cookies configured with `httpOnly: true`, `sameSite: strict` (in production), and `secure: true` when hosted over HTTPS.
+- **Session Hardening**: Cookies configured with `httpOnly: true`, `sameSite: lax`, and `secure: true` when hosted over HTTPS (`production` / Render / Vercel).
 - **CSRF Tokens in Production**: This application runs on cookie-based same-origin sessions. For production deployments exposed across multiple subdomains or external APIs, integrate `csurf` or double-submit CSRF tokens.
 - **Automated Coupon Expiration**: Past active coupons can be archived using `POST /api/admin/coupons/expire-past`. In production, schedule this endpoint via a daily cron job (e.g. `0 0 * * *` at midnight IST):
   ```bash
   # Example crontab entry for midnight coupon expiration
   0 0 * * * curl -X POST http://localhost:3000/api/admin/coupons/expire-past -b /path/to/admin-cookies.txt
   ```
+
+---
+
+## 🚀 Deploying to Render (Recommended Full-Stack Hosting)
+
+Both the **frontend** (served by Express from `frontend/`) and the **backend** (`/api/*`) run together in a single **Render Web Service** (pre-configured via `render.yaml`).
+
+### 1. Provision & Initialize Your Cloud MySQL Database
+Create a free MySQL-compatible cluster (such as **TiDB Cloud Starter**) and import `schema.sql` once.
+
+### 2. Deploy via Render Blueprint (`render.yaml`) or Web Service
+- **Option A — Blueprint (`New → Blueprint`)**: Connect `himanshukumar822/iiit-bbsr-mess` and Render reads `render.yaml` automatically (`npm install`, `npm start`, health check `/api/health`).
+- **Option B — Manual Web Service (`New → Web Service`)**:
+  - **Runtime**: `Node`
+  - **Build Command**: `npm install`
+  - **Start Command**: `npm start`
+  - **Health Check Path**: `/api/health`
+- Add the environment variables (`DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASS`, `DB_NAME=iiit_mess`, `DB_SSL=true`, `DB_SSL_REJECT_UNAUTHORIZED=false`, `SESSION_SECRET`).
+- On Render (`RENDER=true`), sessions persist in MySQL (`sessions` table) and payment receipt images are automatically stored as base64 data URLs in `payments.screenshot_path` so uploads survive Render free-tier restarts.
 
 ---
 

@@ -2,11 +2,13 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 
-const isServerless = Boolean(process.env.VERCEL || process.env.SERVERLESS === 'true');
+const isEphemeralHost = Boolean(
+  process.env.VERCEL || process.env.RENDER || process.env.SERVERLESS === 'true'
+);
 let storage;
 
-if (isServerless) {
-  // Vercel serverless filesystem is read-only; keep uploaded images in memory
+if (isEphemeralHost) {
+  // Vercel is read-only and Render free instances have an ephemeral disk; keep images in memory for DB storage
   storage = multer.memoryStorage();
 } else {
   const uploadDir = path.join(__dirname, '../../uploads');
@@ -41,7 +43,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage,
   limits: {
-    fileSize: isServerless ? 4 * 1024 * 1024 : 5 * 1024 * 1024
+    fileSize: isEphemeralHost ? 4 * 1024 * 1024 : 5 * 1024 * 1024
   },
   fileFilter
 });
