@@ -32,6 +32,7 @@ const registerLimiter = rateLimit({
 // Validation regular expressions
 const ROLL_NO_REGEX = /^[A-Za-z0-9_-]{4,20}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const HOSTEL_BLOCK_REGEX = /^[A-Za-z]+(?:[\s-]+[A-Za-z]+)*$/;
 
 // POST /api/auth/register — student self-registration (role always 'student')
 router.post('/register', registerLimiter, async (req, res) => {
@@ -48,8 +49,23 @@ router.post('/register', registerLimiter, async (req, res) => {
     const trimmedRoll = roll_no.trim();
     const trimmedName = name.trim();
     const trimmedEmail = email.trim().toLowerCase();
-    const trimmedHostel = hostel.trim();
+    const trimmedHostel = hostel.trim().toUpperCase();
     const trimmedRoom = room_no ? room_no.trim() : null;
+
+    if (!trimmedRoll || !trimmedName || !trimmedEmail || !trimmedHostel) {
+      return res.status(400).json({
+        success: false,
+        message: 'roll_no, name, email, password, and hostel block are required fields'
+      });
+    }
+
+    // Validate Hostel Block format (alphabets only, e.g. A, B, C)
+    if (trimmedHostel.length > 50 || !HOSTEL_BLOCK_REGEX.test(trimmedHostel)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Hostel block must contain alphabets only (e.g. A, B, C)'
+      });
+    }
 
     // Validate Roll Number format
     if (!ROLL_NO_REGEX.test(trimmedRoll)) {

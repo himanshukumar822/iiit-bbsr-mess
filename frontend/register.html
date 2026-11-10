@@ -35,14 +35,8 @@
 
         <div class="grid grid-cols-2 gap-2">
           <div class="form-group">
-            <label class="form-label" for="hostel">Hostel *</label>
-            <select id="hostel" class="form-select" required>
-              <option value="" disabled selected>Select Hostel</option>
-              <option value="BH1">Boys Hostel 1 (BH1)</option>
-              <option value="BH2">Boys Hostel 2 (BH2)</option>
-              <option value="BH3">Boys Hostel 3 (BH3)</option>
-              <option value="GH1">Girls Hostel 1 (GH1)</option>
-            </select>
+            <label class="form-label" for="hostel">Hostel Block *</label>
+            <input type="text" id="hostel" class="form-control" placeholder="e.g. A, B, C" maxlength="50" required>
           </div>
 
           <div class="form-group">
@@ -85,13 +79,19 @@
       const name = document.getElementById('name').value.trim();
       const roll_no = document.getElementById('roll_no').value.trim();
       const email = document.getElementById('email').value.trim();
-      const hostel = document.getElementById('hostel').value;
+      const hostel = document.getElementById('hostel').value.trim().toUpperCase();
       const room_no = document.getElementById('room_no').value.trim();
       const password = document.getElementById('password').value;
       const confirm_password = document.getElementById('confirm_password').value;
 
       if (!name || !roll_no || !email || !hostel || !password) {
         showToast('Please fill in all required fields', 'warning');
+        return;
+      }
+
+      const hostelRegex = /^[A-Za-z]+(?:[\s-]+[A-Za-z]+)*$/;
+      if (!hostelRegex.test(hostel)) {
+        showToast('Hostel block must contain alphabets only (e.g. A, B, C)', 'warning');
         return;
       }
 
