@@ -189,6 +189,39 @@ iiit-bbsr-mess/
 
 ---
 
+## ☁️ Deploying to Vercel
+
+This project is pre-configured for full-stack serverless deployment on **Vercel** (serving `frontend/` as static assets and the Express API via `api/index.js` + `vercel.json`).
+
+### 1. Provision a Cloud MySQL Database
+Vercel Serverless Functions are stateless and cannot connect to `localhost` MySQL. Create a managed MySQL 8+ database (such as **TiDB Cloud Serverless**, **Aiven for MySQL**, **Railway**, or **AWS RDS**) and import `schema.sql`:
+```bash
+mysql -h <DB_HOST> -P <DB_PORT> -u <DB_USER> -p <DB_NAME> < schema.sql
+```
+
+### 2. Configure Vercel Environment Variables
+In your Vercel Project (**Settings → Environment Variables**), set:
+
+| Variable | Description | Example / Default |
+| :--- | :--- | :--- |
+| `DB_HOST` | Cloud MySQL hostname | `gateway01.ap-southeast-1.prod.aws.tidbcloud.com` |
+| `DB_PORT` | Cloud MySQL port | `4000` (or `3306`) |
+| `DB_USER` | Database username | `your_db_user` |
+| `DB_PASS` | Database password | `your_db_password` |
+| `DB_NAME` | Database name | `iiit_mess` |
+| `DB_SSL` | Enable TLS for cloud MySQL (`true` / `false`) | `true` |
+| `DB_SSL_REJECT_UNAUTHORIZED` | Verify TLS certificate strictly (`true` / `false`) | `false` |
+| `SESSION_SECRET` | Strong random secret for signing session cookies | `(long random string)` |
+
+### 3. Deploy
+Connect your GitHub repository to Vercel (leaving **Framework Preset** as *Other* and **Root Directory** as `.`). Vercel reads `vercel.json` automatically:
+- Routes `/api/*`, `/login`, and `/uploads/*` to `api/index.js`.
+- Serves static pages from `frontend/`.
+- Persists Express sessions in the MySQL `sessions` table via `backend/utils/sessionStore.js`.
+- Stores uploaded payment screenshots directly as base64 data URLs (`MEDIUMTEXT` in `payments.screenshot_path`) instead of ephemeral local disk files.
+
+---
+
 ## 🖼️ Screenshots
 
 | Student Dashboard | Weekly Menu Timetable |

@@ -115,6 +115,8 @@
       loadPendingPayments();
     });
 
+    let screenshotsByIndex = {};
+
     async function loadPendingPayments() {
       const container = document.getElementById('payments-queue-container');
       container.innerHTML = '<div class="loading-container"><div class="spinner"></div></div>';
@@ -134,7 +136,8 @@
           return;
         }
 
-        container.innerHTML = list.map(item => {
+        screenshotsByIndex = {};
+        container.innerHTML = list.map((item, idx) => {
           let dateRangeStr = 'N/A';
           if (item.start_date && item.end_date) {
             dateRangeStr = `${formatDate(item.start_date)} to ${formatDate(item.end_date)}`;
@@ -142,16 +145,17 @@
 
           let screenshotPreview = '<span class="text-xs text-muted">No screenshot (Cash payment)</span>';
           if (item.screenshot_path) {
+            screenshotsByIndex[idx] = item.screenshot_path;
             screenshotPreview = `
               <div class="flex items-center gap-2 mt-1">
                 <img
                   src="${item.screenshot_path}"
                   alt="Receipt"
                   style="width: 70px; height: 70px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--border); cursor: pointer;"
-                  onclick="openImageModal('${item.screenshot_path}')"
+                  onclick="openImageModalByIndex(${idx})"
                   title="Click to view full screenshot"
                 >
-                <button type="button" class="btn btn-outline btn-sm" onclick="openImageModal('${item.screenshot_path}')">
+                <button type="button" class="btn btn-outline btn-sm" onclick="openImageModalByIndex(${idx})">
                   View Full Receipt
                 </button>
               </div>
@@ -238,6 +242,11 @@
       } catch (err) {
         // Handled by api()
       }
+    }
+
+    function openImageModalByIndex(idx) {
+      const src = screenshotsByIndex[idx];
+      if (src) openImageModal(src);
     }
 
     function openImageModal(src) {

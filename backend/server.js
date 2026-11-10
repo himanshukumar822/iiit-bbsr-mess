@@ -5,10 +5,13 @@ const cors = require('cors');
 const multer = require('multer');
 require('dotenv').config();
 
+const MySQLSessionStore = require('./utils/sessionStore');
+const { ensureWalletSchema } = require('./utils/wallet');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Enable proxy trust for reverse proxies (needed for rate limiters / secure cookies behind proxies)
+// Enable proxy trust for reverse proxies (Vercel / Nginx)
 app.set('trust proxy', 1);
 
 // Middleware: CORS (allow credentials for session cookies)
@@ -23,14 +26,23 @@ app.use(express.urlencoded({ extended: true }));
 
 // Middleware: Static file serving from frontend/ and uploads/
 app.use(express.static(path.join(__dirname, '../frontend')));
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+if (!process.env.VERCEL) {
+  app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+}
 
-// Middleware: Express Session (24 hour maxAge, httpOnly, sameSite)
+// Persistent MySQL-backed Session Store (works locally & across Vercel serverless functions)
+const sessionStore = new MySQLSessionStore({
+  ttlMs: 24 * 60 * 60 * 1000
+});
+
+// Middleware: Express Session (24 hour maxAge, httpOnly, sameSite, proxy-aware)
 app.use(
   session({
+    store: sessionStore,
     secret: process.env.SESSION_SECRET || 'iiit_bbsr_mess_secret_key_change_in_production',
     resave: false,
     saveUninitialized: false,
+    proxy: true,
     cookie: {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
@@ -39,6 +51,16 @@ app.use(
     }
   })
 );
+
+// Ensure schema migrations run once per cold start in serverless environments
+let schemaInitPromise = null;
+app.use('/api', async (req, res, next) => {
+  if (!schemaInitPromise) {
+    schemaInitPromise = ensureWalletSchema().catch(() => {});
+  }
+  await schemaInitPromise;
+  next();
+});
 
 // Multer upload middleware
 const upload = require('./middleware/upload');
@@ -73,7 +95,7 @@ app.get('/api/health', (req, res) => {
 app.use((err, req, res, next) => {
   if (err instanceof multer.MulterError) {
     if (err.code === 'LIMIT_FILE_SIZE') {
-      return res.status(400).json({ success: false, message: 'File too large. Maximum size allowed is 5MB.' });
+      return res.status(400).json({ success: false, message: 'File too large. Maximum size allowed is 4-5MB.' });
     }
     return res.status(400).json({ success: false, message: err.message });
   } else if (err) {
@@ -82,9 +104,8 @@ app.use((err, req, res, next) => {
   next();
 });
 
-// Start server if run directly
+// Start server if run directly (local/VM)
 if (require.main === module) {
-  const { ensureWalletSchema } = require('./utils/wallet');
   ensureWalletSchema().finally(() => {
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);

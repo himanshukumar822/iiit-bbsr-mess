@@ -47,6 +47,18 @@ async function ensureWalletSchema() {
         FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`
     );
+
+    const [payCols] = await db.query(
+      `SELECT DATA_TYPE
+       FROM INFORMATION_SCHEMA.COLUMNS
+       WHERE TABLE_SCHEMA = DATABASE()
+         AND TABLE_NAME = 'payments'
+         AND COLUMN_NAME = 'screenshot_path'`
+    );
+    if (payCols.length > 0 && String(payCols[0].DATA_TYPE).toLowerCase() === 'varchar') {
+      await db.query(`ALTER TABLE payments MODIFY COLUMN screenshot_path MEDIUMTEXT NULL`);
+      console.log('Migration: Expanded payments.screenshot_path to MEDIUMTEXT');
+    }
   } catch (err) {
     console.error('Wallet schema check skipped/failed:', err.message || err.code);
   }

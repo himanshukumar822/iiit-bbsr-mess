@@ -155,6 +155,8 @@
       loadWalletLedger();
     });
 
+    let screenshotsByIndex = {};
+
     async function loadPayments() {
       const tbody = document.getElementById('payments-table-body');
       try {
@@ -166,7 +168,8 @@
           return;
         }
 
-        tbody.innerHTML = payments.map(p => {
+        screenshotsByIndex = {};
+        tbody.innerHTML = payments.map((p, idx) => {
           let periodStr = '-';
           if (p.start_date && p.end_date) {
             periodStr = `${formatDate(p.start_date)} to ${formatDate(p.end_date)}`;
@@ -174,12 +177,13 @@
 
           let screenshotCell = '<span class="text-muted">N/A</span>';
           if (p.screenshot_path) {
+            screenshotsByIndex[idx] = p.screenshot_path;
             screenshotCell = `
               <img
                 src="${p.screenshot_path}"
                 alt="Receipt"
                 style="width: 48px; height: 48px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--border); cursor: pointer;"
-                onclick="openImageModal('${p.screenshot_path}')"
+                onclick="openImageModalByIndex(${idx})"
                 title="Click to view full image"
               >
             `;
@@ -241,6 +245,11 @@
       } catch (err) {
         tbody.innerHTML = '<tr><td colspan="4" class="text-center text-error" style="padding: 2rem;">Error loading wallet transactions.</td></tr>';
       }
+    }
+
+    function openImageModalByIndex(idx) {
+      const src = screenshotsByIndex[idx];
+      if (src) openImageModal(src);
     }
 
     function openImageModal(src) {

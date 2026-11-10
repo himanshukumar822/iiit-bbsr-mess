@@ -2,22 +2,28 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 
-const uploadDir = path.join(__dirname, '../../uploads');
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
+const isServerless = Boolean(process.env.VERCEL || process.env.SERVERLESS === 'true');
+let storage;
 
-// Multer configuration for file uploads (images only, max 5MB)
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    const ext = path.extname(file.originalname).toLowerCase();
-    cb(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
+if (isServerless) {
+  // Vercel serverless filesystem is read-only; keep uploaded images in memory
+  storage = multer.memoryStorage();
+} else {
+  const uploadDir = path.join(__dirname, '../../uploads');
+  if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
   }
-});
+  storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, uploadDir);
+    },
+    filename: (req, file, cb) => {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+      const ext = path.extname(file.originalname).toLowerCase();
+      cb(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
+    }
+  });
+}
 
 const fileFilter = (req, file, cb) => {
   const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
@@ -35,7 +41,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage,
   limits: {
-    fileSize: 5 * 1024 * 1024 // 5 MB max
+    fileSize: isServerless ? 4 * 1024 * 1024 : 5 * 1024 * 1024
   },
   fileFilter
 });

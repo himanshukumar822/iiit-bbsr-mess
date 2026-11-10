@@ -133,7 +133,11 @@ router.post('/coupons/buy', upload.single('screenshot'), async (req, res) => {
     let screenshot_path = null;
     if (method === 'online') {
       if (req.file) {
-        screenshot_path = `/uploads/${req.file.filename}`;
+        if (req.file.buffer) {
+          screenshot_path = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+        } else if (req.file.filename) {
+          screenshot_path = `/uploads/${req.file.filename}`;
+        }
       } else if (req.body.screenshot_path) {
         screenshot_path = req.body.screenshot_path;
       }

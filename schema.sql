@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `payments` (
   `student_id` INT NOT NULL,
   `amount` DECIMAL(10,2) NOT NULL,
   `method` ENUM('cash','online') NOT NULL,
-  `screenshot_path` VARCHAR(255) NULL,
+  `screenshot_path` MEDIUMTEXT NULL,
   `status` ENUM('pending','verified','rejected') DEFAULT 'pending',
   `verified_by` INT NULL,
   `notes` TEXT NULL,
@@ -144,6 +144,14 @@ CREATE TABLE IF NOT EXISTS `wallet_transactions` (
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   INDEX `idx_wallet_student_created` (`student_id`, `created_at`),
   FOREIGN KEY (`student_id`) REFERENCES `users`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 11. sessions table (persistent session store for serverless/Vercel)
+CREATE TABLE IF NOT EXISTS `sessions` (
+  `session_id` VARCHAR(128) NOT NULL PRIMARY KEY,
+  `expires` BIGINT UNSIGNED NOT NULL,
+  `data` MEDIUMTEXT NULL,
+  INDEX `idx_sessions_expires` (`expires`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ==========================================
